@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Config\Config;
 use Tatter\Outbox\Models\AttachmentModel;
 use Tests\Support\DatabaseTestCase;
 
@@ -60,5 +61,22 @@ class EventTest extends DatabaseTestCase
 		
 		$attachment = model(AttachmentModel::class)->first();
 		$this->assertEquals(12026, $attachment->bytes);
+	}
+
+	public function testEventRespectsConfigLogging()
+	{
+		$config = config('Outbox');
+		$config->logging = false;
+		Config::injectMock('Outbox', $config);
+
+		$result = $this->email
+			->setFrom('from@example.com')
+			->setSubject('Email test')
+			->setMessage('This is only a test.')
+			->setMailType('html')
+			->send();
+
+		$this->assertTrue($result);
+		$this->dontSeeInDatabase('outbox_emails', ['subject' => 'Email test']);
 	}
 }

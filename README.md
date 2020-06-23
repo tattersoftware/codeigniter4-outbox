@@ -13,21 +13,29 @@ Email toolkit for CodeIgniter 4
 **Outbox** supplies a handful of useful tools to supplement the framework's native `Email`
 class.
 
-## Logging
+## Configuration (optional)
+
+The library's default behavior can be altered by extending its config file. Copy
+**examples/Outbox.php** to **app/Config/** and follow the instructions
+in the comments. If no config file is found in **app/Config** then the library will use its own.
+
+## Usage
+
+### Logging
 
 By default **Outbox** will log any successfully sent emails in the database. This provides
 a handy paper-trail for applications that send a variety of status and communication
 messages to users. Use the `Tatter\Outbox\Models\EmailModel` and its corresponding entity
 to view email logs.
 
-## Templating
+### Templating
 
 **Outbox** comes with a CodeIgniter-ready version of the
 [Responsive HTML Email Template](https://github.com/leemunroe/responsive-html-email-template).
 This provides a solid basis for your emails so you can be sure they will display nicely on
 any device. You may also write your own templates to use with the rest of the features.
 
-## Inlining
+### Inlining
 
 Sending HTML email can be tricky, as support for HTML and CSS vary across displays and devices.
 **Outbox** includes `CssToInlineStyles`, a module by *tijsverkoyen* to take any CSS and
@@ -54,7 +62,7 @@ $this->email
 	->send();
 ```
 
-## Tokenizing
+### Tokenizing
 
 Sometimes instead of sending mail internally your application will work with an external
 email service API. **Outbox** provides a way of tokenizing your templates so they will work
