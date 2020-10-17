@@ -9,7 +9,7 @@ use Tests\Support\DatabaseTestCase;
 class EntityTest extends DatabaseTestCase
 {
 	/**
-	 * Record of the eamil sent during setUp.
+	 * Record of the email sent during setUp.
 	 *
 	 * @var Tatter\Outbox\Entities\Email
 	 */

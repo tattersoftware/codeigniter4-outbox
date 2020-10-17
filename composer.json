@@ -9,7 +9,7 @@
 		"inline",
 		"logging"
 	],
-	"homepage": "https://github.com/tattersoftware/codeigniter4-patches",
+	"homepage": "https://github.com/tattersoftware/codeigniter4-outbox",
 	"license": "MIT",
 	"authors": [
 		{
