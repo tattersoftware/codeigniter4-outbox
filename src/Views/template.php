@@ -133,7 +133,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link"><?= $contact ?? '' ?></span>
-                    <br> Don't like these emails? <a href="<?= site_url('unsubscribe') ?>">Unsubscribe</a>.
+                    <br> Don't like these emails? <?= $unsubscribe ?? '' ?>.
                   </td>
                 </tr>
               </table>
