@@ -14,7 +14,7 @@ class TemplateSeeder extends \CodeIgniter\Database\Seeder
 
 		// Prep the parser tokens
 		$tokens = ['subject', 'title', 'preview', 'main', 'contact', 'unsubscribe'];
-		$data      = [];
+		$data   = [];
 		foreach ($tokens as $token)
 		{
 			$data[$token] = '{' . $token . '}';
@@ -22,10 +22,10 @@ class TemplateSeeder extends \CodeIgniter\Database\Seeder
 
 		// Render the view into a parsable version and add it to the database
 		model(TemplateModel::class)->insert([
-			'name'      => 'Default',
-			'subject'   => '{subject}',
-			'body'      => view(config('Outbox')->template, $data),
-			'tokens' => implode(',', $tokens),
+			'name'    => 'Default',
+			'subject' => '{subject}',
+			'body'    => view(config('Outbox')->template, $data, ['debug' => false]),
+			'tokens'  => implode(',', $tokens),
 		]);
 	}
 }
