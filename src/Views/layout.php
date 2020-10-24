@@ -7,10 +7,14 @@
 	<meta name="author" content="Tatter Software">
 	<title>Email Templates</title>
 
+	<?= service('assets')->tag('vendor/tinymce/tinymce.min.js') ?>
+
 	<?= service('assets')->tag('vendor/jquery/jquery.min.js') ?>
+
 	<?= service('assets')->tag('vendor/bootstrap/bootstrap.min.css') ?>
 
-	<?= service('alerts')->css() ?>
+	<?= $this->renderSection('headerAssets') ?>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -31,10 +35,10 @@
 		</div>
 	</nav>
 
-	<?php if ($error = session()->getFlashdata('error'): ?>
+	<?php if ($error = session()->getFlashdata('error')): ?>
 	<p class="bg-danger"><?= $error ?></p>
 	<?php endif; ?>
-	<?php if ($success = session()->getFlashdata('success'): ?>
+	<?php if ($success = session()->getFlashdata('success')): ?>
 	<p class="bg-success"><?= $success ?></p>
 	<?php endif; ?>
 
@@ -45,6 +49,8 @@
 	</main><!-- /.container -->
 
 	<?= service('assets')->tag('vendor/bootstrap/bootstrap.bundle.min.js') ?>
+
+	<?= $this->renderSection('footerAssets') ?>
 
 </body>
 </html>

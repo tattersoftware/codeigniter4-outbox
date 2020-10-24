@@ -1,16 +1,16 @@
-<?= $this->extend($config->layouts['public']) ?>
+<?= $this->extend(config('Outbox')->layout) ?>
 <?= $this->section('main') ?>
 
 	<div class="row">
 		<div class="col">
 			<h1><?= $method ?> Template</h1>
-			<h6><?= $template->name ?></h6>
+			<h2 class="mb-3"><?= $template->name ?></h2>
 
-			<form name="email-template-form" class="form-inline" action="<?= site_url('emails/templates/') ?>" method="post">
+			<form name="email-template-form" action="<?= site_url('emails/templates/') ?>" method="post">
 				<div class="form-group">
 					<label for="tokens">Available tokens</label>
-
-					<?php if ($method === 'Edit'): 
+					<br />
+					<?php if ($method === 'Edit'): ?>
 					<?php foreach ($template->tokens as $token): ?>
 					<span class="badge badge-secondary"><?= $token ?></span>
 					<?php endforeach; ?>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group">
 					<label for="body">Body</label>
-					<textarea class="form-control" id="body" style="visibility:hidden;"><?= $template->body ?></textarea>
+					<textarea class="form-control" id="body" rows="20"><?= $template->body ?></textarea>
 				</div>
 				<div class="form-group">
 					<input name="template_id" type="hidden" value="<?= $template->id ?>">
@@ -45,17 +45,4 @@
 		</div>
 	</div>
 
-<?= $this->endSection() ?>
-<?= $this->section('footerAssets') ?>
-<script>
-$(document).ready(function() {
-	tinymce.init({
-		selector: '#body',
-		height: 600,
-		plugins: "code link save",
-		menubar: "file edit insert format table tools",
-		toolbar: "code link save"
-	});
-});
-</script>
 <?= $this->endSection() ?>

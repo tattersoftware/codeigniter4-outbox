@@ -1,4 +1,4 @@
-<?= $this->extend($config->layouts['public']) ?>
+<?= $this->extend(config('Outbox')->layout) ?>
 <?= $this->section('main') ?>
 
 	<div class="row">
@@ -14,6 +14,7 @@
 						<th scope="col">Name</th>
 						<th scope="col">Subject</th>
 						<th scope="col">Added</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -22,7 +23,12 @@
 					<tr>
 						<td><?= $template->name ?></td>
 						<td><?= $template->subject ?></td>
-						<td><?= $template->createdAt->format('n/j/Y') ?></td>
+						<td><?= $template->created_at->format('n/j/Y') ?></td>
+						<td>
+							<?= anchor('emails/templates/show/' . $template->id, 'View') ?>
+							|
+							<?= anchor('emails/templates/edit/' . $template->id, 'Edit') ?>
+						</td>
 					</tr>
 					<?php endforeach; ?>
 
