@@ -36,10 +36,10 @@
 	</nav>
 
 	<?php if ($error = session()->getFlashdata('error')): ?>
-	<p class="bg-danger"><?= $error ?></p>
+	<p class="bg-danger p-3"><?= $error ?></p>
 	<?php endif; ?>
 	<?php if ($success = session()->getFlashdata('success')): ?>
-	<p class="bg-success"><?= $success ?></p>
+	<p class="bg-success p-3"><?= $success ?></p>
 	<?php endif; ?>
 
 	<main role="main" class="container my-5">

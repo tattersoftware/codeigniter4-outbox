@@ -1,5 +1,7 @@
 <?php namespace Tatter\Outbox;
 
+use CodeIgniter\Email\Email;
+use Tatter\Outbox\Entities\Template
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
@@ -7,6 +9,24 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
  */
 class Outbox
 {
+	/**
+	 * Renders a Template with inlined CSS.
+	 *
+	 * @param Template $template
+	 * @param array $data Variables to exchange for Template tokens
+	 * @param string|null $styles CSS to use for inlining, defaults to configured view
+	 *
+	 * @return Email
+	 */
+	public static function fromTemplate(Template $template, $data = [], string $styles = null): Email
+	{
+		// Replace tokens with $data values
+		return new Email([
+			'subject' => service('parser')->setData($data)->renderString($template->subject),
+			'message' => $template->render($data, $styles),
+		]);
+	}
+
 	/**
 	 * Wrapper function to integrate `CssToInlineStyles` with framework views.
 	 *

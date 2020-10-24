@@ -28,6 +28,8 @@
 							<?= anchor('emails/templates/show/' . $template->id, 'View') ?>
 							|
 							<?= anchor('emails/templates/edit/' . $template->id, 'Edit') ?>
+							|
+							<?= anchor('emails/templates/new/' . $template->id, 'Clone') ?>
 						</td>
 					</tr>
 					<?php endforeach; ?>

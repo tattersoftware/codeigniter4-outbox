@@ -6,9 +6,9 @@
 			<h1><?= $method ?> Template</h1>
 			<h2 class="mb-3"><?= $template->name ?></h2>
 
-			<form name="email-template-form" action="<?= site_url('emails/templates/') ?>" method="post">
+			<form name="email-template-form" action="<?= site_url('emails/templates/' . ($method === 'Edit' ? 'update/' . $template->id : 'create')) ?>" method="post">
 				<div class="form-group">
-					<label for="tokens">Available tokens</label>
+					<label for="tokens">Available Tokens</label>
 					<br />
 					<?php if ($method === 'Edit'): ?>
 					<?php foreach ($template->tokens as $token): ?>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group">
 					<label for="body">Body</label>
-					<textarea class="form-control" id="body" rows="20"><?= $template->body ?></textarea>
+					<textarea name="body" class="form-control" id="body" rows="30" style="font-family: monospace;"><?= $template->body ?></textarea>
 				</div>
 				<div class="form-group">
 					<input name="template_id" type="hidden" value="<?= $template->id ?>">

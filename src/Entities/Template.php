@@ -21,11 +21,20 @@ class Template extends Entity
 	 */
 	public function render($data = [], string $styles = null): string
 	{
+		if (empty($this->attributes['body']))
+		{
+			return '';
+		}
+
 		// Replace tokens with $data values
 		$body = service('parser')->setData($data)->renderString($this->attributes['body']);
 
 		// Determine styling
 		$styles = $styles ?? view(config('Outbox')->styles, [], ['debug' => false]);
+		if (empty($styles))
+		{
+			return $body;
+		}
 
 		return (new CssToInlineStyles)->convert(
 			$body,
