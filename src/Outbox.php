@@ -20,11 +20,18 @@ class Outbox
 	 */
 	public static function fromTemplate(Template $template, $data = [], string $styles = null): Email
 	{
+		// Start with default config and add necessary settings
+		$config             = get_object_vars(config('Email'));
+		$config['mailType'] = 'hmtl';
+		$config['wordWrap'] = false;
+
+		$email = new Email($config);
+
 		// Replace tokens with $data values
-		return new Email([
-			'subject' => service('parser')->setData($data)->renderString($template->subject),
-			'message' => $template->render($data, $styles),
-		]);
+		$email->setSubject(service('parser')->setData($data)->renderString($template->subject));
+		$email->setMessage($template->render($data, $styles));
+
+		return $email;
 	}
 
 	/**

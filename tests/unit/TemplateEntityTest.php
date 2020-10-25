@@ -1,10 +1,10 @@
 <?php
 
+use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DOMParser;
 use Tatter\Outbox\Entities\Template;
-use Tests\Support\DatabaseTestCase;
 
-class EmailEntityTest extends DatabaseTestCase
+class TemplateEntityTest extends CIUnitTestCase
 {
 	/**
 	 * @var DOMParser

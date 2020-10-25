@@ -1,8 +1,10 @@
 <?php
 
+use CodeIgniter\Email\Email;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureResponse;
+use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Outbox;
 
 class LibraryTest extends CIUnitTestCase
@@ -64,6 +66,38 @@ class LibraryTest extends CIUnitTestCase
 
 		$parser = new FeatureResponse($this->response->setBody($result));
 		$parser->assertSee('{main}', 'tr');
+	}
+
+	public function testFromTemplateReturnsEmail()
+	{
+		$template = new Template([
+			'name'    => 'Test Template',
+			'subject' => 'Some {subject}',
+			'body'    => '<p>{number}</p>',
+			'tokens'  => ['subject', 'number', 'foobar']
+		]);
+
+		$result = Outbox::fromTemplate($template);
+
+		$this->assertInstanceOf(Email::class, $result);
+	}
+
+	public function testFromTemplateUsesData()
+	{
+		$template = new Template([
+			'name'    => 'Test Template',
+			'subject' => 'Some {subject}',
+			'body'    => '<p>{number}</p>',
+			'tokens'  => ['subject', 'number', 'foobar']
+		]);
+
+		$email = Outbox::fromTemplate($template, [
+			'subject' => 'pig',
+		]);
+
+		$result = $this->getPrivateProperty($email, 'tmpArchive');
+
+		$this->assertEquals('Some pig', $result['subject']);
 	}
 }
 
