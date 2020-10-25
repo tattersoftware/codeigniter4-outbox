@@ -1,7 +1,7 @@
 <?php namespace Tatter\Outbox;
 
 use CodeIgniter\Email\Email;
-use Tatter\Outbox\Entities\Template
+use Tatter\Outbox\Entities\Template;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
