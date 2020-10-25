@@ -30,6 +30,8 @@
 							<?= anchor('emails/templates/edit/' . $template->id, 'Edit') ?>
 							|
 							<?= anchor('emails/templates/new/' . $template->id, 'Clone') ?>
+							|
+							<?= anchor('emails/templates/send/' . $template->id, 'Send') ?>
 						</td>
 					</tr>
 					<?php endforeach; ?>

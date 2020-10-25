@@ -148,5 +148,43 @@ class Templates extends ResourcePresenter
 	 */
 	public function delete($templateId = null): RedirectResponse
 	{
+		$template = $this->getTemplate($templateId);
+
+		if ($this->model->delete($template->id))
+		{
+			return redirect()->back()->with('success', 'Email template updated');
+		}
+
+		return redirect()->back()->withInput()->with('error', $this->model->error());
+	}
+
+	/**
+	 * Displays the form to send an email.
+	 *
+	 * @param string|int $templateId
+	 *
+	 * @return string
+	 *
+	 * @throws PageNotFoundException
+	 */
+	public function send($templateId = null): string
+	{
+		return view('Tatter\Outbox\Views\Templates\send', [
+			'template' => $this->getTemplate($templateId),
+		]);
+	}
+
+	/**
+	 * Sends an email using the Template.
+	 *
+	 * @param string|int $templateId
+	 *
+	 * @return RedirectResponse
+	 *
+	 * @throws PageNotFoundException
+	 */
+	public function send_commit($templateId = null): RedirectResponse
+	{
+		$template = $this->getTemplate($templateId);
 	}
 }
