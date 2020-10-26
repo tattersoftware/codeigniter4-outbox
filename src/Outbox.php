@@ -22,7 +22,7 @@ class Outbox
 	{
 		// Start with default config and add necessary settings
 		$config             = get_object_vars(config('Email'));
-		$config['mailType'] = 'hmtl';
+		$config['mailType'] = 'html';
 		$config['wordWrap'] = false;
 
 		$email = new Email($config);

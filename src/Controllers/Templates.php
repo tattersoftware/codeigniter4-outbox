@@ -185,6 +185,24 @@ class Templates extends ResourcePresenter
 	 */
 	public function send_commit($templateId = null): RedirectResponse
 	{
-		$template = $this->getTemplate($templateId);
+		if (! $this->validate([
+			'fromEmail'  => 'valid_email',
+			'recipients' => 'valid_emails',
+		]))
+		{
+			return redirect()->back()->withInput()->with('error', implode('. ', $this->validator->getErrors()));
+		}
+
+		$email = Outbox::fromTemplate($this->getTemplate($templateId), $this->request->getPost());
+
+		$email->setFrom($this->request->getPost('fromEmail'), $this->request->getPost('fromName'));
+		$email->setTo($this->request->getPost('recipients'));
+
+		if ($email->send(false))
+		{
+			return redirect()->back()->with('success', 'Email sent');
+		}
+
+		return redirect()->back()->withInput()->with('error', $email->printDebugger([]));
 	}
 }

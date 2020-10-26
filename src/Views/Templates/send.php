@@ -13,6 +13,7 @@
 					</label>
 					<div class="col-sm-10">
 						<input
+							class="form-control"
 							name="fromEmail"
 							type="text"
 							id="fromEmail"
@@ -27,6 +28,7 @@
 					</label>
 					<div class="col-sm-10">
 						<input
+							class="form-control"
 							name="fromName"
 							type="text"
 							id="fromName"
@@ -41,15 +43,16 @@
 					</label>
 					<div class="col-sm-10">
 						<input
+							class="form-control"
 							name="recipients"
 							type="text"
 							id="recipients"
 							value="<?= old('recipients', config('Email')->recipients) ?>"
-							placeholder="email1@exmaple.com, email2@example.com"
+							placeholder="email1@example.com, email2@example.com"
 						/>
 					</div>
 				</div>
-
+				<hr />
 				<h5>Tokens</h5>
 
 				<?php foreach ($template->tokens as $token): ?>
@@ -58,7 +61,7 @@
 						<span class="badge badge-secondary"><?= $token ?></span>
 					</label>
 					<div class="col-sm-10">
-						<input name="<?= $token ?>" type="text" id="<?= $token ?>" value="<?= old($token) ?>" placeholder="<?= $token ?>">
+						<input class="form-control" name="<?= $token ?>" type="text" id="<?= $token ?>" value="<?= old($token) ?>" placeholder="<?= $token ?>">
 					</div>
 				</div>
 				<?php endforeach; ?>

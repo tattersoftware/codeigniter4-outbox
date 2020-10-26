@@ -26,15 +26,15 @@
 				</div>
 				<div class="form-group">
 					<label for="name">Name</label>
-					<input name="name" type="text" class="form-control" id="name" value="<?= $template->name ?>">
+					<input name="name" type="text" class="form-control" id="name" value="<?= old('name', $template->name) ?>">
 				</div>
 				<div class="form-group">
 					<label for="subject">Subject</label>
-					<input name="subject" type="text" class="form-control" id="subject" value="<?= $template->subject ?>">
+					<input name="subject" type="text" class="form-control" id="subject" value="<?= old('subject', $template->subject) ?>">
 				</div>
 				<div class="form-group">
 					<label for="body">Body</label>
-					<textarea name="body" class="form-control" id="body" rows="30" style="font-family: monospace;"><?= $template->body ?></textarea>
+					<textarea name="body" class="form-control" id="body" rows="30" style="font-family: monospace;"><?= old('body', $template->body) ?></textarea>
 				</div>
 				<div class="form-group">
 					<input name="template_id" type="hidden" value="<?= $template->id ?>">
