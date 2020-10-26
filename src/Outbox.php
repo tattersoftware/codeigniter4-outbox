@@ -21,11 +21,9 @@ class Outbox
 	public static function fromTemplate(Template $template, $data = [], string $styles = null): Email
 	{
 		// Start with default config and add necessary settings
-		$config             = get_object_vars(config('Email'));
-		$config['mailType'] = 'html';
-		$config['wordWrap'] = false;
-
-		$email = new Email($config);
+		$email = service('email');
+		$email->mailType = 'html';
+		$email->wordWrap = false;
 
 		// Replace tokens with $data values
 		$email->setSubject(service('parser')->setData($data)->renderString($template->subject));

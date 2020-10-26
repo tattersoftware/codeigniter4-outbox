@@ -67,7 +67,7 @@ class Templates extends ResourcePresenter
 	{
 		if ($this->model->insert($this->request->getPost()))
 		{
-			return redirect()->to(site_url('emails/templates'))->with('success', 'Email template created');
+			return redirect()->to(site_url('emails/templates'))->with('success', 'Email template created.');
 		}
 
 		return redirect()->back()->withInput()->with('error', $this->model->error());
@@ -131,7 +131,7 @@ class Templates extends ResourcePresenter
 
 		if ($this->model->update($template->id, $this->request->getPost()))
 		{
-			return redirect()->back()->with('success', 'Email template updated');
+			return redirect()->back()->with('success', 'Email template updated.');
 		}
 
 		return redirect()->back()->withInput()->with('error', $this->model->error());
@@ -146,13 +146,13 @@ class Templates extends ResourcePresenter
 	 *
 	 * @throws PageNotFoundException
 	 */
-	public function delete($templateId = null): RedirectResponse
+	public function remove($templateId = null): RedirectResponse
 	{
 		$template = $this->getTemplate($templateId);
 
 		if ($this->model->delete($template->id))
 		{
-			return redirect()->back()->with('success', 'Email template updated');
+			return redirect()->back()->with('success', 'Email template removed.');
 		}
 
 		return redirect()->back()->withInput()->with('error', $this->model->error());

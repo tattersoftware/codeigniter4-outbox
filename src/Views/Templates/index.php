@@ -32,6 +32,8 @@
 							<?= anchor('emails/templates/new/' . $template->id, 'Clone') ?>
 							|
 							<?= anchor('emails/templates/send/' . $template->id, 'Send') ?>
+							|
+							<?= anchor('emails/templates/remove/' . $template->id, 'Remove') ?>
 						</td>
 					</tr>
 					<?php endforeach; ?>
