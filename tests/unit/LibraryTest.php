@@ -5,6 +5,7 @@ use CodeIgniter\HTTP\Response;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureResponse;
 use Tatter\Outbox\Entities\Template;
+use Tatter\Outbox\Config\Outbox as OutboxConfig;
 use Tatter\Outbox\Outbox;
 
 class LibraryTest extends CIUnitTestCase
@@ -12,7 +13,7 @@ class LibraryTest extends CIUnitTestCase
 	/**
 	 * Instance of the config.
 	 *
-	 * @var BaseConfig
+	 * @var OutboxConfig
 	 */
 	protected $config;
 

@@ -4,13 +4,14 @@ use CodeIgniter\Test\CIDatabaseTestCase;
 use CodeIgniter\Test\Mock\MockEmail;
 use Config\Services;
 use Faker\Factory;
+use Faker\Generator;
 
 class DatabaseTestCase extends CIDatabaseTestCase
 {
 	/**
 	 * Faker instance for generating content.
 	 *
-	 * @var Faker\Factory
+	 * @var Generator
 	 */
 	protected static $faker;
 
