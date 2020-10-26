@@ -1,7 +1,8 @@
 # Tatter\Outbox
 Email toolkit for CodeIgniter 4
 
-[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHP%20Unit%20Tests/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions?query=workflow%3A%22PHP+Unit+Tests)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions?query=workflow%3A%22PHPUnit)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions?query=workflow%3A%22PHPStan)
 
 ## Quick Start
 
