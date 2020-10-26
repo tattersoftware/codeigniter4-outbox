@@ -53,10 +53,7 @@ class Outbox
 	 		$styles = config('Outbox')->styles;
 	 	}
 
-		return (new CssToInlineStyles)->convert(
-			view($template, $data),
-			view($styles)
-		);
+		return (new CssToInlineStyles)->convert(view($template, $data), view($styles));
 	 }
 
 	/**

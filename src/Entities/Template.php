@@ -36,10 +36,7 @@ class Template extends Entity
 			return $body;
 		}
 
-		return (new CssToInlineStyles)->convert(
-			$body,
-			$styles,
-		);
+		return (new CssToInlineStyles)->convert($body, $styles);
 	}
 }
 
