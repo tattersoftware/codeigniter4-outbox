@@ -1,149 +1,56 @@
 <!doctype html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title><?= $title ?? '' ?></title>
-    <style>
-      /* -------------------------------------
-          RESPONSIVE AND MOBILE FRIENDLY STYLES
-      ------------------------------------- */
-      @media only screen and (max-width: 620px) {
-        table[class=body] h1 {
-          font-size: 28px !important;
-          margin-bottom: 10px !important; 
-        }
-        table[class=body] p,
-        table[class=body] ul,
-        table[class=body] ol,
-        table[class=body] td,
-        table[class=body] span,
-        table[class=body] a {
-          font-size: 16px !important; 
-        }
-        table[class=body] .wrapper,
-        table[class=body] .article {
-          padding: 10px !important; 
-        }
-        table[class=body] .content {
-          padding: 0 !important; 
-        }
-        table[class=body] .container {
-          padding: 0 !important;
-          width: 100% !important; 
-        }
-        table[class=body] .main {
-          border-left-width: 0 !important;
-          border-radius: 0 !important;
-          border-right-width: 0 !important; 
-        }
-        table[class=body] .btn table {
-          width: 100% !important; 
-        }
-        table[class=body] .btn a {
-          width: 100% !important; 
-        }
-        table[class=body] .img-responsive {
-          height: auto !important;
-          max-width: 100% !important;
-          width: auto !important; 
-        }
-      }
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="Tatter Software">
+	<title>Email Templates</title>
 
-      /* -------------------------------------
-          PRESERVE THESE STYLES IN THE HEAD
-      ------------------------------------- */
-      @media all {
-        .ExternalClass {
-          width: 100%; 
-        }
-        .ExternalClass,
-        .ExternalClass p,
-        .ExternalClass span,
-        .ExternalClass font,
-        .ExternalClass td,
-        .ExternalClass div {
-          line-height: 100%; 
-        }
-        .apple-link a {
-          color: inherit !important;
-          font-family: inherit !important;
-          font-size: inherit !important;
-          font-weight: inherit !important;
-          line-height: inherit !important;
-          text-decoration: none !important; 
-        }
-        #MessageViewBody a {
-          color: inherit;
-          text-decoration: none;
-          font-size: inherit;
-          font-family: inherit;
-          font-weight: inherit;
-          line-height: inherit;
-        }
-        .btn-primary table td:hover {
-          background-color: #34495e !important; 
-        }
-        .btn-primary a:hover {
-          background-color: #34495e !important;
-          border-color: #34495e !important; 
-        } 
-        .btn-orange table td:hover {
-          background-color: #e0681c !important; 
-        }
-        .btn-orange a:hover {
-          background-color: #e0681c !important;
-          border-color: #e06110 !important; 
-        }
-      }
+	<?= service('assets')->tag('vendor/tinymce/tinymce.min.js') ?>
 
-    </style>
-  </head>
-  <body class="">
-    <span class="preheader"><?= $preview ?? '' ?></span>
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
-      <tr>
-        <td>&nbsp;</td>
-        <td class="container">
-          <div class="content">
+	<?= service('assets')->tag('vendor/jquery/jquery.min.js') ?>
 
-            <!-- START CENTERED WHITE CONTAINER -->
-            <table role="presentation" class="main">
+	<?= service('assets')->tag('vendor/bootstrap/bootstrap.min.css') ?>
 
-              <!-- START MAIN CONTENT AREA -->
-              <tr>
-                <td class="wrapper">
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
+	<?= $this->renderSection('headerAssets') ?>
 
-						<?= $main ?? '' ?>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<a class="navbar-brand" href="<?= site_url() ?>">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-                    </tr>
-                  </table>
-                </td>
-              </tr>
+		<div class="collapse navbar-collapse" id="navbars">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('emails/templates') ?>">List Templates</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('emails/templates/new') ?>">Add Template</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
-            <!-- END MAIN CONTENT AREA -->
-            </table>
-            <!-- END CENTERED WHITE CONTAINER -->
+	<?php if ($error = session()->getFlashdata('error')): ?>
+	<p class="bg-danger p-3"><?= $error ?></p>
+	<?php endif; ?>
+	<?php if ($success = session()->getFlashdata('success')): ?>
+	<p class="bg-success p-3"><?= $success ?></p>
+	<?php endif; ?>
 
-            <!-- START FOOTER -->
-            <div class="footer">
-              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td class="content-block">
-                    <span class="apple-link"><?= $contact ?? '' ?></span>
-                    <br> Don't like these emails? <?= $unsubscribe ?? '' ?>.
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <!-- END FOOTER -->
+	<main role="main" class="container my-5">
 
-          </div>
-        </td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
-  </body>
+		<?= $this->renderSection('main') ?>
+
+	</main><!-- /.container -->
+
+	<?= service('assets')->tag('vendor/bootstrap/bootstrap.bundle.min.js') ?>
+
+	<?= $this->renderSection('footerAssets') ?>
+
+</body>
 </html>

@@ -115,9 +115,7 @@
                 <td class="wrapper">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-
-						<?= $main ?? '' ?>
-
+<?= $main ?? '' ?>
                     </tr>
                   </table>
                 </td>
@@ -133,7 +131,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link"><?= $contact ?? '' ?></span>
-                    <br> Don't like these emails? <a href="<?= site_url('unsubscribe') ?>">Unsubscribe</a>.
+                    <br> Don't like these emails? <?= $unsubscribe ?? '' ?>.
                   </td>
                 </tr>
               </table>
