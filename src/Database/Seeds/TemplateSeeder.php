@@ -13,7 +13,7 @@ class TemplateSeeder extends \CodeIgniter\Database\Seeder
 		}
 
 		// Prep the parser tokens
-		$tokens = ['subject', 'title', 'preview', 'main', 'contact', 'unsubscribe'];
+		$tokens = ['subject', 'title', 'preview', 'body', 'contact', 'unsubscribe'];
 		$data   = [];
 		foreach ($tokens as $token)
 		{

@@ -13,6 +13,7 @@
 					<tr>
 						<th scope="col">Name</th>
 						<th scope="col">Subject</th>
+						<th scope="col">Parent</th>
 						<th scope="col">Added</th>
 						<th scope="col"></th>
 					</tr>
@@ -23,6 +24,7 @@
 					<tr>
 						<td><?= $template->name ?></td>
 						<td><?= $template->subject ?></td>
+						<td><?= ($parent = $template->getParent()) ? $parent->name : 'NONE' ?></td>
 						<td><?= $template->created_at->format('n/j/Y') ?></td>
 						<td>
 							<?= anchor('emails/templates/show/' . $template->id, 'View') ?>

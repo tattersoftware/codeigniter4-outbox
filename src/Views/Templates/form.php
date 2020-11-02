@@ -25,6 +25,18 @@
 					/>
 				</div>
 				<div class="form-group">
+					<label for="parent_id">Parent Template</label>
+					<select name="parent_id">
+						<option value="">NONE</option>
+
+						<?php foreach ($templates as $temp): ?>
+						<?php if ($temp->id === $template->id): continue; endif; ?>
+						<option value="<?= $temp->id ?>" <?= $temp->id === $template->parent_id ? 'selected' : '' ?>><?= $temp->name ?></option>
+						<?php endforeach; ?>
+
+					</select>
+				</div>
+				<div class="form-group">
 					<label for="name">Name</label>
 					<input name="name" type="text" class="form-control" id="name" value="<?= old('name', $template->name) ?>">
 				</div>
@@ -34,7 +46,7 @@
 				</div>
 				<div class="form-group">
 					<label for="body">Body</label>
-					<textarea name="body" class="form-control" id="body" rows="30" style="font-family: monospace;"><?= old('body', $template->body) ?></textarea>
+					<textarea name="body" class="form-control" id="body" rows="25" style="font-family: monospace;"><?= old('body', $template->body) ?></textarea>
 				</div>
 				<div class="form-group">
 					<input name="template_id" type="hidden" value="<?= $template->id ?>">

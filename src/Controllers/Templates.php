@@ -53,8 +53,9 @@ class Templates extends ResourcePresenter
 		$template = is_null($templateId) ? new Template() : $this->model->find($templateId);
 
 		return view('Tatter\Outbox\Views\Templates\form', [
-			'method'   => $template->id ? 'Clone' : 'New',
-			'template' => $template,
+			'method'    => $template->id ? 'Clone' : 'New',
+			'template'  => $template,
+			'templates' => $this->model->orderBy('name')->findAll(),
 		]);
 	}
 
@@ -111,8 +112,9 @@ class Templates extends ResourcePresenter
 	public function edit($templateId = null): string
 	{
 		return view('Tatter\Outbox\Views\Templates\form', [
-			'method'   => 'Edit',
-			'template' => $this->getTemplate($templateId),
+			'method'    => 'Edit',
+			'template'  => $this->getTemplate($templateId),
+			'templates' => $this->model->orderBy('name')->findAll(),
 		]);
 	}
 
