@@ -14,6 +14,6 @@ class TemplateModel extends Model
 	protected $skipValidation = true;
 
 	protected $allowedFields = [
-		'name', 'subject', 'body', 'tokens',
+		'name', 'subject', 'body', 'tokens', 'parent_id',
 	];
 }

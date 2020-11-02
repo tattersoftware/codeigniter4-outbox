@@ -18,6 +18,7 @@ class TemplateEntityTest extends CIUnitTestCase
 
 	public function setUp(): void
 	{
+		$this->resetServices();
 		parent::setUp();
 
 		$this->parser   = new DOMParser();

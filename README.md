@@ -6,7 +6,7 @@ Email toolkit for CodeIgniter 4
 
 ## Quick Start
 
-1. Install with Composer: `> composer require --dev tatter/outbox`
+1. Install with Composer: `> composer require tatter/outbox`
 2. Migrate the database: `> php spark migrate -all`
 
 ## Description
@@ -108,3 +108,14 @@ version of the `Email` class with rendered and inlined content from the library:
 $email = Outbox::fromTemplate($template);
 $email->setTo('jill@example.com')->send();
 ```
+
+### Cascading Templates
+
+Each `Template` may also be entered with a "Parent Template". Parent templates need to have
+a `{body}` token which will receive the parsed content from its child. Additional tokens
+in the parent template can be entered by defining them in the child.
+
+Cascading templates makes it easy to have a few "layouts" with many different variable
+messages for each layout. For example, your app may send both newsletters and receipts
+with their own layout (Parent Template) and then a myriad of different custom content
+for different types of users.
