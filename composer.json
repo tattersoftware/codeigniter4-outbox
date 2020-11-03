@@ -28,6 +28,7 @@
 		"twbs/bootstrap": "^4.5"
 	},
 	"require-dev": {
+		"codeigniter4/codeigniter4": "dev-develop",
 		"myth/auth": "dev-develop",
 		"tatter/tools": "^1.0"
 	},
