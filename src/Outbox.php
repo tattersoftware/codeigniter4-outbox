@@ -26,7 +26,7 @@ class Outbox
 		$email->wordWrap = false;
 
 		// Replace tokens with $data values
-		$email->setSubject(service('parser')->setData($data)->renderString($template->subject));
+		$email->setSubject(service('parser')->setData($data)->renderString($template->subject, ['debug' => false]));
 		$email->setMessage($template->render($data, $styles));
 
 		return $email;
@@ -53,7 +53,7 @@ class Outbox
 	 		$styles = config('Outbox')->styles;
 	 	}
 
-		return (new CssToInlineStyles)->convert(view($template, $data), view($styles));
+		return (new CssToInlineStyles)->convert(view($template, $data, ['debug' => false]), view($styles, [], ['debug' => false]));
 	 }
 
 	/**
