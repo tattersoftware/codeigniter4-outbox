@@ -20,11 +20,25 @@ class Outbox extends \Tatter\Outbox\Config\Outbox
 	public $logging = true;
 
 	/**
+	 * Whether to include routes to the Templates Controller.
+	 *
+	 * @var boolean
+	 */
+	public $routeTemplates = false;
+
+	/**
+	 * Layout to use for template management.
+	 *
+	 * @var string
+	 */
+	public $layout = 'Tatter\Outbox\Views\layout';
+
+	/**
 	 * Default view for email templating.
 	 *
 	 * @var string
 	 */
-	public $template = 'Tatter\Outbox\Views\layout';
+	public $template = 'Tatter\Outbox\Views\template';
 
 	/**
 	 * Default CSS style view to apply to the template.

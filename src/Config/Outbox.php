@@ -12,6 +12,13 @@ class Outbox extends BaseConfig
 	public $logging = true;
 
 	/**
+	 * Whether to include routes to the Templates Controller.
+	 *
+	 * @var boolean
+	 */
+	public $routeTemplates = false;
+
+	/**
 	 * Layout to use for template management.
 	 *
 	 * @var string
