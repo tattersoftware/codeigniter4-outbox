@@ -7,6 +7,11 @@ use Tests\Support\DatabaseTestCase;
 
 class TemplateModelTest extends DatabaseTestCase
 {
+	/**
+	 * @var Template
+	 */
+	protected $template;
+
 	public function setUp(): void
 	{
 		parent::setUp();
