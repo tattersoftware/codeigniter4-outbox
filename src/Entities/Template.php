@@ -29,7 +29,7 @@ class Template extends Entity
 		}
 
 		// Replace tokens with $data values
-		$body = service('parser')->setData($data, 'raw')->renderString($this->attributes['body']);
+		$body = service('parser')->setData($data, 'raw')->renderString($this->attributes['body'], ['debug' => false]);
 
 		// If this has a parent Template then render it with this body
 		if ($parent = $this->getParent())

@@ -1,5 +1,6 @@
 {
 	"name": "tatter/outbox",
+	"type": "library",
 	"description": "Email toolkit for CodeIgniter 4",
 	"keywords": [
 		"codeigniter",
@@ -19,30 +20,17 @@
 			"role": "Developer"
 		}
 	],
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/codeigniter4/CodeIgniter4"
-		}
-	],
-	"minimum-stability": "dev",
-	"prefer-stable": true,
 	"require": {
-		"php" : ">=7.2",
+		"php": ">=7.2",
+		"components/jquery": "^3.3",
 		"tatter/assets": "^2.2",
 		"tijsverkoyen/css-to-inline-styles": "^2.2",
-		"twbs/bootstrap": "^4.5",
-		"components/jquery": "^3.3"
+		"twbs/bootstrap": "^4.5"
 	},
 	"require-dev": {
 		"codeigniter4/codeigniter4": "dev-develop",
-		"codeigniter4/codeigniter4-standard": "^1.0",
-		"fzaninotto/faker": "^1.9@dev",
-		"mikey179/vfsstream": "^1.6",
 		"myth/auth": "dev-develop",
-		"phpstan/phpstan": "^0.12",
-		"phpunit/phpunit": "^8.5",
-		"squizlabs/php_codesniffer": "^3.5"
+		"tatter/tools": "^1.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -54,9 +42,17 @@
 			"Tests\\Support\\": "tests/_support"
 		}
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/codeigniter4/CodeIgniter4"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"scripts": {
 		"analyze": "phpstan analyze",
-		"style": "phpcbf --standard=./vendor/codeigniter4/codeigniter4-standard/CodeIgniter4 src/ tests/",
+		"style": "phpcs --standard=./vendor/codeigniter4/codeigniter4-standard/CodeIgniter4 tests/ src/",
 		"test": "phpunit"
 	}
 }
