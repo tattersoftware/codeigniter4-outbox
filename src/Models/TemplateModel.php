@@ -28,12 +28,12 @@ class TemplateModel extends Model
 	 * @throws TemplatesException
 	 */
 	public function findByName(string $name): Template
-    {
-    	if ($template = $this->where('name', $name)->first())
-    	{
-    		return $template;
-    	}
+	{
+		if ($template = $this->where('name', $name)->first())
+		{
+			return $template;
+		}
 
 		throw TemplatesException::forMissingTemplate($name);
-    }
+	}
 }

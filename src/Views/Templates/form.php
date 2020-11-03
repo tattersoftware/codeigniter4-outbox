@@ -30,8 +30,8 @@
 						<option value="">NONE</option>
 
 						<?php foreach ($templates as $temp): ?>
-						<?php if ($temp->id === $template->id): continue; endif; ?>
-						<option value="<?= $temp->id ?>" <?= $temp->id === $template->parent_id ? 'selected' : '' ?>><?= $temp->name ?></option>
+						<?php if ($temp->id == $template->id): continue; endif; ?>
+						<option value="<?= $temp->id ?>" <?= $temp->id == $template->parent_id ? 'selected' : '' ?>><?= $temp->name ?></option>
 						<?php endforeach; ?>
 
 					</select>
