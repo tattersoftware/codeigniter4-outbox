@@ -1,6 +1,5 @@
 <?php
 
-use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DOMParser;
 use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Models\TemplateModel;
