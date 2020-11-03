@@ -32,13 +32,14 @@ class LibraryTest extends CIUnitTestCase
 	protected $data = [
 		'title'       => 'First Email Ever',
 		'preview'     => 'Please do not think this is spam!',
-		'main'        => 'Hey there! Good of you to sign up.<br /> We would like to offer you...',
+		'body'        => 'Hey there! Good of you to sign up.<br /> We would like to offer you...',
 		'contact'     => 'support@example.com',
 		'unsubscribe' => '<a href="https://example.com/unsubscribe">Unsubscribe</a>',	
 	];
 
 	public function setUp(): void
 	{
+		$this->resetServices();
 		parent::setUp();
 
 		$this->config   = config('Outbox');
@@ -66,7 +67,7 @@ class LibraryTest extends CIUnitTestCase
 		$result = Outbox::tokenize();
 
 		$parser = new FeatureResponse($this->response->setBody($result));
-		$parser->assertSee('{main}', 'tr');
+		$parser->assertSee('{body}', 'tr');
 	}
 
 	public function testFromTemplateReturnsEmail()

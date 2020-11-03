@@ -68,7 +68,7 @@ class Outbox
 	 	// If no variables were specified use the defaults for the bundled template
 	 	if (is_null($vars))
 	 	{
-	 		$vars = ['title', 'preview', 'main', 'contact', 'unsubscribe'];
+	 		$vars = ['title', 'preview', 'body', 'contact', 'unsubscribe'];
 	 	}
 
 		$data = [];
