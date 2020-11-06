@@ -97,7 +97,7 @@ class Templates extends ResourcePresenter
 	 */
 	public function show($templateId = null): string
 	{
-		return $this->getTemplate($templateId)->render();
+		return $this->getTemplate($templateId)->renderBody();
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Templates extends ResourcePresenter
 		return view('Tatter\Outbox\Views\Templates\form', [
 			'method'    => 'Edit',
 			'template'  => $this->getTemplate($templateId),
-			'templates' => $this->model->orderBy('name')->findAll(),
+			'templates' => $this->model->where('id !=', $templateId)->orderBy('name')->findAll(),
 		]);
 	}
 
@@ -195,7 +195,7 @@ class Templates extends ResourcePresenter
 			return redirect()->back()->withInput()->with('error', implode('. ', $this->validator->getErrors()));
 		}
 
-		$email = Outbox::fromTemplate($this->getTemplate($templateId), $this->request->getPost());
+		$email = $this->getTemplate($templateId)->email($this->request->getPost());
 
 		$email->setFrom($this->request->getPost('fromEmail'), $this->request->getPost('fromName'));
 		$email->setTo($this->request->getPost('recipients'));

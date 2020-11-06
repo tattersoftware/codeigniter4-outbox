@@ -55,7 +55,7 @@
 				<hr />
 				<h5>Tokens</h5>
 
-				<?php foreach ($template->tokens as $token): ?>
+				<?php foreach ($template->getTokens() as $token): ?>
 				<div class="form-group row">
 					<label for="<?= $token ?>" class="col-sm-2 col-form-label">
 						<span class="badge badge-secondary"><?= $token ?></span>

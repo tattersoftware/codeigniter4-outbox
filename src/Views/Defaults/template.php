@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title><?= $title ?? '' ?></title>
+    <title>{title}</title>
     <style>
       /* -------------------------------------
           RESPONSIVE AND MOBILE FRIENDLY STYLES
@@ -100,7 +100,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader"><?= $preview ?? '' ?></span>
+    <span class="preheader">{preview}</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -115,9 +115,9 @@
                 <td class="wrapper">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-
-<?= $body ?? '' ?>
-
+                      <td>
+                        {body}
+                      </td>
                     </tr>
                   </table>
                 </td>
@@ -132,8 +132,8 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link"><?= $contact ?? '' ?></span>
-                    <br> Don't like these emails? <?= $unsubscribe ?? '' ?>.
+                    <span class="apple-link">{contact}</span>
+                    <br> Don't like these emails? {unsubscribe}.
                   </td>
                 </tr>
               </table>

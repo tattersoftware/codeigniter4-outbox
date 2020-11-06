@@ -27,23 +27,16 @@ class Outbox extends \Tatter\Outbox\Config\Outbox
 	public $routeTemplates = false;
 
 	/**
-	 * Layout to use for template management.
+	 * Layout to use for Template management.
 	 *
 	 * @var string
 	 */
 	public $layout = 'Tatter\Outbox\Views\layout';
 
 	/**
-	 * Default view for email templating.
+	 * View path for the default CSS styles to inline.
 	 *
 	 * @var string
 	 */
-	public $template = 'Tatter\Outbox\Views\template';
-
-	/**
-	 * Default CSS style view to apply to the template.
-	 *
-	 * @var string
-	 */
-	public $styles = 'Tatter\Outbox\Views\styles';
+	public $styles = 'Tatter\Outbox\Views\Defaults\styles';
 }
