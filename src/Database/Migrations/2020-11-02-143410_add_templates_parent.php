@@ -7,7 +7,7 @@ class AddTemplatesParent extends Migration
 	public function up()
 	{
 		$this->forge->addColumn('outbox_templates', [
-			'parent_id' => ['type' => 'int', 'null' => true, 'after' => 'tokens'],
+			'parent_id' => ['type' => 'int', 'null' => true, 'after' => 'body'],
 		]);
 	}
 
