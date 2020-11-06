@@ -68,7 +68,9 @@ class Template extends Entity
 
 		if ($parent = $this->getParent())
 		{
-			$matches[1] = array_unique(array_merge($parent->getTokens(), $matches[1]));
+			// Prepend parent tokens (minus {body})
+			$parentTokens = array_diff($parent->getTokens(), ['body']);
+			$matches[1]   = array_unique(array_merge($parentTokens, $matches[1]));
 		}
 
 		return $matches[1];
