@@ -7,7 +7,18 @@ Email toolkit for CodeIgniter 4
 ## Quick Start
 
 1. Install with Composer: `> composer require tatter/outbox`
-2. Migrate the database: `> php spark migrate -all`
+2. Prepare the database: `> php spark migrate -all && php spark db:seed "Tatter\Outbox\Database\Seeds\TemplateSeeder"`
+3. Send beautiful, dynamic email:
+```
+model(TemplateModel::class)->findByName('Default')
+	->email([
+		'item' => 'Fancy Purse',
+		'cost' => '10 dollars',
+		'url'  => site_url('items/show/' . $itemId),
+	])
+	->setTo($user->email)
+	->send();
+```
 
 ## Description
 
@@ -35,48 +46,23 @@ Sending HTML email can be tricky, as support for HTML and CSS vary across displa
 **Outbox** includes `CssToInlineStyles`, a module by *tijsverkoyen* to take any CSS and
 inject it inline into an email template for maximum compatibility. This allows you to reuse
 site stylesheets or write your own from scratch and use them across any of your templates.
-Simply supply your display data to `inline()`, along with the optional template and CSS view
-paths:
-```
-use Tatter\Outbox\Outbox;
-
-...
-
-$data = [
-	'title'       => 'First Email Ever',
-	'preview'     => 'Please do not think this is spam!',
-	'main'        => 'Hey there! Good of you to sign up.<br /> We would like to offer you...',
-	'contact'     => 'support@example.com',
-	'unsubscribe' => '<a href="https://example.com/unsubscribe">Unsubscribe</a>',	
-];
-$message = Outbox::inline($data, 'EmailTemplates/MarketCampaign');
-$this->email
-	->setMessage($message)
-	->setMailType('html')
-	->send();
-```
-
-### Tokenizing
-
-Sometimes instead of sending mail internally your application will work with an external
-email service API. **Outbox** provides a way of tokenizing your templates so they will work
-with popular merge-style services. Simply set your configuration details and then supply the
-list of variables to tokenize:
-
-	$template = Outbox::tokenize(['title', 'main', 'unsubscribe']);
-
-**Outbox** will return your template with the tokenize values ready for submission.
+Use the default styles from
+[Responsive HTML Email Template](https://github.com/leemunroe/responsive-html-email-template),
+supply your own as string parameters, or create a View file and add it to the configuration.
 
 ## Templating
 
-**Outbox** comes with a CodeIgniter-ready version of the
+**Outbox** comes with a default template, a modified-for-CodeIgniter version of the
 [Responsive HTML Email Template](https://github.com/leemunroe/responsive-html-email-template).
 This provides a solid basis for your emails so you can be sure they will display nicely on
-any device.
+any device. Run the Template Seeder to begin using this as the default:
 
-You may also write your own templates to use with the rest of the features. **Outbox** provides
-migrations and an Entity, a Model, Views, and a Controller for managing email templates in your
-database. To enable the Controller you will need to add the following routes to **app/Config/Routes.php**:
+	php spark db:seed "Tatter\Outbox\Database\Seeds\TemplateSeeder"
+
+You may also write your own templates and seed them or use the provided MVC bundle for
+managing email templates in your database. To enable the Controller you will need to
+toggle `$routeTemplates` in the configuration, or add the following routes to **app/Config/Routes.php**:
+
 ```
 // Routes to Email Templates
 $routes->group('emails', ['namespace' => '\Tatter\Outbox\Controllers'], function ($routes)
@@ -88,34 +74,37 @@ $routes->group('emails', ['namespace' => '\Tatter\Outbox\Controllers'], function
 });
 ```
 
-Of course you may provide your own interfaces as well, and should probably secure access to
-these routes with a Filter either way.
+Be sure to secure appropriate access to these routes (e.g. with a Filter).
 
-Templates use predefined "tokens" that will be passed through COdeIgniter's Parser to add
-your data. The `Template` Entity can do this for you with the `render($data = [])` method
-to get back a ready-to-go HTML email string:
+### Tokens
+
+Templates use View Parser "tokens" that will be passed through to add your data.
+The `Template` Entity can do this for you by passing in your data parameters:
+
 ```
-$template = model(TemplateModel::class)->where('name', 'Newsletter')->first();
-$email    = service('Email');
+$template = model(TemplateModel::class)->findByName('Item Purchase');
 
-$email->setBody($template->render(['title' => 'Pumpkins are here!']));
-$email->send();
+$subject = $template->renderSubject(['item' => 'Fancy Purse']);
+$body    = $template->renderBody(['cost' => '10 dollars']);
 ```
 
-If you want to take advantage of `Outbox`'s style inlining you can get a fully prepared
+`renderBody()` will take care of inlining any CSS you have provided and including your
+template in its parent (if defined).
+
+If you do not need any other configuration you can get a fully prepared
 version of the `Email` class with rendered and inlined content from the library:
 ```
-$email = Outbox::fromTemplate($template);
+$email = $template->email($data);
 $email->setTo('jill@example.com')->send();
 ```
 
 ### Cascading Templates
 
-Each `Template` may also be entered with a "Parent Template". Parent templates need to have
+Each `Template` may also be created with a "Parent Template". Parent templates need to have
 a `{body}` token which will receive the parsed content from its child. Additional tokens
 in the parent template can be entered by defining them in the child.
 
 Cascading templates makes it easy to have a few "layouts" with many different variable
 messages for each layout. For example, your app may send both newsletters and receipts
-with their own layout (Parent Template) and then a myriad of different custom content
-for different types of users.
+with their own layout (Parent Template) and then a myriad of different customizable
+messages for different occasions.
