@@ -97,7 +97,7 @@ class Templates extends ResourcePresenter
 	 */
 	public function show($templateId = null): string
 	{
-		return $this->getTemplate($templateId)->render();
+		return $this->getTemplate($templateId)->renderBody();
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Templates extends ResourcePresenter
 		return view('Tatter\Outbox\Views\Templates\form', [
 			'method'    => 'Edit',
 			'template'  => $this->getTemplate($templateId),
-			'templates' => $this->model->orderBy('name')->findAll(),
+			'templates' => $this->model->where('id !=', $templateId)->orderBy('name')->findAll(),
 		]);
 	}
 

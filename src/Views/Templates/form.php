@@ -8,30 +8,12 @@
 
 			<form name="email-template-form" action="<?= site_url('emails/templates/' . ($method === 'Edit' ? 'update/' . $template->id : 'create')) ?>" method="post">
 				<div class="form-group">
-					<label for="tokens">Available Tokens</label>
-					<br />
-					<?php if ($method === 'Edit'): ?>
-					<?php foreach ($template->tokens as $token): ?>
-					<span class="badge badge-secondary"><?= $token ?></span>
-					<?php endforeach; ?>
-					<?php endif; ?>
-
-					<input type="<?= $method === 'Edit' ? 'hidden' : 'text' ?>"
-						class="form-control"
-						name="tokens"
-						id="tokens"
-						placeholder="token1,token2,token3,..."
-						value="<?= implode(',', $template->tokens) ?>"
-					/>
-				</div>
-				<div class="form-group">
 					<label for="parent_id">Parent Template</label>
 					<select name="parent_id">
 						<option value="">NONE</option>
 
-						<?php foreach ($templates as $temp): ?>
-						<?php if ($temp->id == $template->id): continue; endif; ?>
-						<option value="<?= $temp->id ?>" <?= $temp->id == $template->parent_id ? 'selected' : '' ?>><?= $temp->name ?></option>
+						<?php foreach ($templates as $option): ?>
+						<option value="<?= $option->id ?>" <?= $option->id == $template->parent_id ? 'selected' : '' ?>><?= $option->name ?></option>
 						<?php endforeach; ?>
 
 					</select>

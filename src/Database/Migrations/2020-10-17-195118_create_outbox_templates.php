@@ -10,7 +10,6 @@ class CreateOutboxTemplates extends Migration
 			'name'       => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
 			'subject'    => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
 			'body'       => ['type' => 'text', 'null' => true],
-			'tokens'     => ['type' => 'text', 'null' => true],
 			'created_at' => ['type' => 'datetime', 'null' => true],
 			'updated_at' => ['type' => 'datetime', 'null' => true],
 			'deleted_at' => ['type' => 'datetime', 'null' => true],
