@@ -47,7 +47,8 @@ class ParentTemplateTest extends DatabaseTestCase
 
 	public function testChildIncludesParentTokens()
 	{
-		$expected = ['subject', 'body', 'foobar', 'number'];
+		// Notice that {body} is intentionally excluded
+		$expected = ['subject', 'foobar', 'number'];
 		$result   = $this->template->getTokens();
 
 		$this->assertEquals($expected, array_values($result));
