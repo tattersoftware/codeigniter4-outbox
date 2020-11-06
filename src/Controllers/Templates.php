@@ -195,7 +195,7 @@ class Templates extends ResourcePresenter
 			return redirect()->back()->withInput()->with('error', implode('. ', $this->validator->getErrors()));
 		}
 
-		$email = Outbox::fromTemplate($this->getTemplate($templateId), $this->request->getPost());
+		$email = $this->getTemplate($templateId)->email($this->request->getPost());
 
 		$email->setFrom($this->request->getPost('fromEmail'), $this->request->getPost('fromName'));
 		$email->setTo($this->request->getPost('recipients'));
