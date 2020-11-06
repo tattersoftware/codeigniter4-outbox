@@ -20,7 +20,6 @@ class TemplateModelTest extends DatabaseTestCase
 			'name'      => 'Test Template',
 			'subject'   => 'Some {subject}',
 			'body'      => '<p>{number}</p>',
-			'tokens'    => ['subject', 'number', 'foobar'],
 		]);
 		$this->template->id = model(TemplateModel::class)->insert($this->template);
 	}

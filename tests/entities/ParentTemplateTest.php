@@ -5,7 +5,7 @@ use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Models\TemplateModel;
 use Tests\Support\DatabaseTestCase;
 
-class ParentTest extends DatabaseTestCase
+class ParentTemplateTest extends DatabaseTestCase
 {
 	/**
 	 * @var DOMParser
@@ -33,7 +33,6 @@ class ParentTest extends DatabaseTestCase
 			'name'    => 'Parent Template',
 			'subject' => 'Parent {subject}',
 			'body'    => '<div>{body}</div><aside>{foobar}</aside>',
-			'tokens'  => ['subject', 'body', 'foobar'],
 		]);
 		$this->parent->id = model(TemplateModel::class)->insert($this->parent);
 
@@ -41,17 +40,33 @@ class ParentTest extends DatabaseTestCase
 			'name'      => 'Test Template',
 			'subject'   => 'Some {subject}',
 			'body'      => '<p>{number}</p>',
-			'tokens'    => ['subject', 'number', 'foobar'],
 			'parent_id' => $this->parent->id,
 		]);
 		$this->template->id = model(TemplateModel::class)->insert($this->template);
 	}
 
-	public function testRenderReturnsParentBody()
+	public function testChildIncludesParentTokens()
+	{
+		$expected = ['subject', 'body', 'foobar', 'number'];
+		$result   = $this->template->getTokens();
+
+		$this->assertEquals($expected, array_values($result));
+	}
+
+	public function testChildFallsBackToParentSubject()
+	{
+		$this->template->subject = '';
+
+		$result = $this->template->getSubject();
+
+		$this->assertEquals('Parent {subject}', $result);
+	}
+
+	public function testRenderBodyIncludesParentBody()
 	{
 		// Expect the child variable in the parent context with inlined CSS
 		$expected = '<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">{number}</p>';
-		$result   = $this->template->render();
+		$result   = $this->template->renderBody();
 
 		$this->parser->withString($result);
 		$this->assertTrue($this->parser->see('{number}', 'p'));
@@ -61,7 +76,7 @@ class ParentTest extends DatabaseTestCase
 
 	public function testRenderAppliesTokens()
 	{
-		$this->parser->withString($this->template->render([
+		$this->parser->withString($this->template->renderBody([
 			'number' => 'Banana',
 			'foobar' => 'Orange',
 		]));
@@ -72,7 +87,7 @@ class ParentTest extends DatabaseTestCase
 
 	public function testRenderInlinesStyles()
 	{
-		$result = $this->template->render([], 'aside { color: magenta; }');
+		$result = $this->template->renderBody([], 'aside { color: magenta; }');
 
 		$this->parser->withString($result);
 

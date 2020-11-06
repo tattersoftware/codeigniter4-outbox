@@ -6,7 +6,7 @@ use Tatter\Outbox\Entities\Recipient;
 use Tatter\Outbox\Models\EmailModel;
 use Tests\Support\DatabaseTestCase;
 
-class EmailEntityTest extends DatabaseTestCase
+class EmailTest extends DatabaseTestCase
 {
 	/**
 	 * Record of the email sent during setUp.
