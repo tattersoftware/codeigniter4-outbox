@@ -19,6 +19,7 @@ class Email extends Entity
 		'sendMultipart' => 'boolean',
 		'BCCBatchMode'  => 'boolean',
 		'BCCBatchSize'  => 'int',
+		'template_id'   => '?int',
 	];
 
 	/**

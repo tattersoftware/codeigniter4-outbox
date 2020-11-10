@@ -16,5 +16,6 @@ class EmailModel extends Model
 	protected $allowedFields = [
 		'subject', 'body', 'fromEmail', 'fromName', 'userAgent', 'protocol', 'mailType',
 		'charset', 'priority', 'sendMultipart', 'BCCBatchMode', 'BCCBatchSize',
+		'template', 'template_id',
 	];
 }

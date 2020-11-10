@@ -1,7 +1,9 @@
 <?php
 
 use CodeIgniter\Config\Config;
+use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Models\AttachmentModel;
+use Tatter\Outbox\Models\TemplateModel;
 use Tests\Support\DatabaseTestCase;
 
 class EventTest extends DatabaseTestCase
@@ -78,5 +80,20 @@ class EventTest extends DatabaseTestCase
 
 		$this->assertTrue($result);
 		$this->dontSeeInDatabase('outbox_emails', ['subject' => 'Email test']);
+	}
+
+	public function testEventRecordsTemplate()
+	{
+		$templateId = model(TemplateModel::class)->insert(new Template([
+			'name'      => 'Test Template',
+			'subject'   => 'Some {subject}',
+			'body'      => '<p>{number}</p>',
+		]));
+
+		$template = model(TemplateModel::class)->findByName('Test Template');
+		$template->email()->send();
+
+		$this->seeInDatabase('outbox_emails', ['template' => 'Test Template']);
+		$this->seeInDatabase('outbox_emails', ['template_id' => $templateId]);
 	}
 }

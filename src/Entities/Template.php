@@ -149,9 +149,11 @@ class Template extends Entity
 	public function email($data = [], string $styles = null): Email
 	{
 		// Start with the default config and add necessary settings
-		$email           = service('email');
-		$email->mailType = 'html';
-		$email->wordWrap = false;
+		$email              = service('email');
+		$email->mailType    = 'html';
+		$email->wordWrap    = false;
+		$email->template    = $this->attributes['name'];
+		$email->template_id = $this->attributes['id'] ?? null;
 
 		// Render the subject and body and return the Email instance
 		return $email
