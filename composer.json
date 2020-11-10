@@ -30,7 +30,7 @@
 	"require-dev": {
 		"codeigniter4/codeigniter4": "dev-develop",
 		"myth/auth": "dev-develop",
-		"tatter/tools": "^1.0"
+		"tatter/tools": "^1.2"
 	},
 	"autoload": {
 		"psr-4": {
@@ -52,7 +52,7 @@
 	"prefer-stable": true,
 	"scripts": {
 		"analyze": "phpstan analyze",
-		"style": "phpcs --standard=./vendor/codeigniter4/codeigniter4-standard/CodeIgniter4 tests/ src/",
+		"style": "phpcbf --standard=./vendor/codeigniter4/codeigniter4-standard/CodeIgniter4 tests/ src/",
 		"test": "phpunit"
 	}
 }
