@@ -30,7 +30,7 @@ class DatabaseTestCase extends CIDatabaseTestCase
 	 *
 	 * @var string|array|null
 	 */
-    protected $namespace = 'Tatter\Outbox';
+	protected $namespace = 'Tatter\Outbox';
 
 	/**
 	 * Path to a file for attachments.
@@ -46,17 +46,17 @@ class DatabaseTestCase extends CIDatabaseTestCase
 	 */
 	protected $email;
 
-    /**
-     * Initializes the Test Helper.
-     */
-    public static function setUpBeforeClass(): void
-    {
-    	helper('test');
+	/**
+	 * Initializes the Test Helper.
+	 */
+	public static function setUpBeforeClass(): void
+	{
+		helper('test');
 		self::$faker = Factory::create();
 
 		// Globally mock Email so nothing really sends
-        Services::injectMock('email', new MockEmail(config('Email')));
-    }
+		Services::injectMock('email', new MockEmail(config('Email')));
+	}
 
 	public function setUp(): void
 	{

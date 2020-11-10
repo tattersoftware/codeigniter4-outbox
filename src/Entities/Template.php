@@ -8,10 +8,14 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 class Template extends Entity
 {
 	protected $table = 'outbox_templates';
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-    protected $casts = [
-    	'parent_id' => '?int',
-    ];
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at',
+	];
+	protected $casts = [
+		'parent_id' => '?int',
+	];
 
 	/**
 	 * Stored parent Template.
@@ -81,7 +85,7 @@ class Template extends Entity
 	/**
 	 * Renders the body with inlined CSS.
 	 *
-	 * @param array $data Variables to exchange for Template tokens
+	 * @param array       $data   Variables to exchange for Template tokens
 	 * @param string|null $styles CSS to use for inlining, defaults to configured view
 	 *
 	 * @return string
@@ -137,7 +141,7 @@ class Template extends Entity
 	/**
 	 * Returns an Email instance primed to this Template's rendered values.
 	 *
-	 * @param array $data         Variables to use when rendering the body
+	 * @param array       $data   Variables to use when rendering the body
 	 * @param string|null $styles CSS to use for inlining, null to use configured view
 	 *
 	 * @return Email
@@ -145,7 +149,7 @@ class Template extends Entity
 	public function email($data = [], string $styles = null): Email
 	{
 		// Start with the default config and add necessary settings
-		$email = service('email');
+		$email           = service('email');
 		$email->mailType = 'html';
 		$email->wordWrap = false;
 
