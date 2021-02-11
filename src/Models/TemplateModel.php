@@ -36,4 +36,23 @@ class TemplateModel extends Model
 
 		throw TemplatesException::forMissingTemplate($name);
 	}
+
+	/**
+	 * Returns a Template by its id, throws if not found.
+	 *
+	 * @param int $id
+	 *
+	 * @return Template
+	 *
+	 * @throws TemplatesException
+	 */
+	public function findById(int $id): Template
+	{
+		if ($template = $this->find($id))
+		{
+			return $template;
+		}
+
+		throw TemplatesException::forMissingTemplate($id);
+	}
 }
