@@ -26,9 +26,9 @@ class Outbox extends BaseConfig
 	public $layout = 'Tatter\Outbox\Views\layout';
 
 	/**
-	 * View path for the default CSS styles to inline.
+	 * View path for the default CSS styles to inline, `null` to disable
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	public $styles = 'Tatter\Outbox\Views\Defaults\styles';
 }

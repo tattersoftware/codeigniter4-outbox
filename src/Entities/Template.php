@@ -85,12 +85,12 @@ class Template extends Entity
 	/**
 	 * Renders the body with inlined CSS.
 	 *
-	 * @param array       $data   Variables to exchange for Template tokens
-	 * @param string|null $styles CSS to use for inlining, defaults to configured view
+	 * @param array       $data Variables to exchange for Template tokens
+	 * @param string|null $css  CSS to use for inlining, null to use view from config
 	 *
 	 * @return string
 	 */
-	public function renderBody($data = [], string $styles = null): string
+	public function renderBody($data = [], string $css = null): string
 	{
 		if (empty($this->attributes['body']))
 		{
@@ -107,13 +107,16 @@ class Template extends Entity
 		{
 			$data['body'] = $body;
 
-			return $parent->renderBody($data, $styles);
+			return $parent->renderBody($data, $css);
 		}
 
 		// Determine styling
-		$styles = $styles ?? view(config('Outbox')->styles, [], ['debug' => false]);
+		if (is_null($css) && config('Outbox')->styles)
+		{
+			$css = view(config('Outbox')->styles, [], ['debug' => false]);
+		}
 
-		return $styles === '' ? $body : (new CssToInlineStyles)->convert($body, $styles);
+		return $css === '' ? $body : (new CssToInlineStyles)->convert($body, $css);
 	}
 
 	/**
