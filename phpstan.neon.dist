@@ -10,7 +10,9 @@ parameters:
 		- src/Config/Routes.php
 		- src/Views/*
 	ignoreErrors:
-		- '#Unsafe usage of new static\(\)#'
+		- '#Call to an undefined static method Config\\Services::[A-Za-z]+\(\)#'
+		- '#Cannot access property [\$a-z_]+ on (array|object)#'
+		- '#Unsafe usage of new static\(\)*#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- Faker\Generator
