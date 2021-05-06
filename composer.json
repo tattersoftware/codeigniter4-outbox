@@ -25,7 +25,7 @@
 		"components/jquery": "^3.3",
 		"tatter/assets": "^2.2",
 		"tijsverkoyen/css-to-inline-styles": "^2.2",
-		"twbs/bootstrap": "^4.5"
+		"twbs/bootstrap": "^4.5 || ^5.0"
 	},
 	"require-dev": {
 		"codeigniter4/codeigniter4": "dev-develop",
