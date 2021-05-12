@@ -1,0 +1,28 @@
+# When a PR is opened or a push is made, compare
+# code for backwards compatibility.
+name: RoaveBC
+
+on:
+  pull_request:
+    branches:
+      - develop
+    paths:
+      - 'src/**'
+  push:
+    branches:
+      - develop
+    paths:
+      - 'src/**'
+
+jobs:
+  compare:
+    name: Compare for Backwards Compatibility
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run comparison
+        uses: docker://nyholm/roave-bc-check-ga
+        env:
+          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}

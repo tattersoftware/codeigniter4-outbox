@@ -53,6 +53,7 @@ class Email extends Entity
 	 */
 	public function getRecipients(): array
 	{
+		// test
 		return $this->getRelatedItems('recipient');
 	}
 
