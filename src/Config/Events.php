@@ -14,7 +14,7 @@ Events::on('email', function($params)
 	}
 
 	// Create the email record
-	if ($id = model(EmailModel::class)->insert($params))
+	if ($id = model(EmailModel::class)->ignore()->insert($params))
 	{
 		// Add each recipient
 		foreach ($params['recipients'] as $email)
