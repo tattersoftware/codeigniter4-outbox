@@ -1,6 +1,7 @@
 <?php
 
 use CodeIgniter\Test\DatabaseTestTrait;
+use Tatter\Outbox\Database\Seeds\TemplateSeeder;
 use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Exceptions\TemplatesException;
 use Tatter\Outbox\Models\TemplateModel;
@@ -41,5 +42,21 @@ final class TemplateModelTest extends OutboxTestCase
 		$this->expectExceptionMessage(lang('Templates.missingTemplate', ['foobar']));
 
 		model(TemplateModel::class)->findByName('foobar');
+	}
+
+	public function testSeederIgnoresExisting()
+	{
+		$this->seed(TemplateSeeder::class);
+
+		$this->dontSeeInDatabase('outbox_templates', ['name' => 'Default']);
+	}
+
+	public function testSeederCreatesDefault()
+	{
+		model(TemplateModel::class)->truncate();
+
+		$this->seed(TemplateSeeder::class);
+
+		$this->seeInDatabase('outbox_templates', ['name' => 'Default']);
 	}
 }
