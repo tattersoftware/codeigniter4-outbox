@@ -1,13 +1,16 @@
 <?php
 
 use CodeIgniter\Config\Config;
+use CodeIgniter\Test\DatabaseTestTrait;
 use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Models\AttachmentModel;
 use Tatter\Outbox\Models\TemplateModel;
-use Tests\Support\DatabaseTestCase;
+use Tests\Support\OutboxTestCase;
 
-class EventTest extends DatabaseTestCase
+final class EventTest extends OutboxTestCase
 {
+	use DatabaseTestTrait;
+
 	public function testEventCreatesEmail()
 	{
 		$result = $this->email

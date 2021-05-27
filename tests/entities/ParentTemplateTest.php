@@ -1,26 +1,29 @@
 <?php
 
+use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\DOMParser;
 use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Models\TemplateModel;
-use Tests\Support\DatabaseTestCase;
+use Tests\Support\OutboxTestCase;
 
-class ParentTemplateTest extends DatabaseTestCase
+final class ParentTemplateTest extends OutboxTestCase
 {
+	use DatabaseTestTrait;
+
 	/**
 	 * @var DOMParser
 	 */
-	protected $parser;
+	private $parser;
 
 	/**
 	 * @var Template
 	 */
-	protected $parent;
+	private $parent;
 
 	/**
 	 * @var Template
 	 */
-	protected $template;
+	private $template;
 
 	public function setUp(): void
 	{

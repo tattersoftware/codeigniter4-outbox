@@ -1,19 +1,22 @@
 <?php
 
+use CodeIgniter\Test\DatabaseTestTrait;
 use Tatter\Outbox\Entities\Attachment;
 use Tatter\Outbox\Entities\Email;
 use Tatter\Outbox\Entities\Recipient;
 use Tatter\Outbox\Models\EmailModel;
-use Tests\Support\DatabaseTestCase;
+use Tests\Support\OutboxTestCase;
 
-class EmailTest extends DatabaseTestCase
+final class EmailTest extends OutboxTestCase
 {
+	use DatabaseTestTrait;
+
 	/**
 	 * Record of the email sent during setUp.
 	 *
 	 * @var Tatter\Outbox\Entities\Email
 	 */
-	protected $entity;
+	private $entity;
 
 	/**
 	 * Send an email and fetch the database entry.

@@ -1,16 +1,19 @@
 <?php
 
+use CodeIgniter\Test\DatabaseTestTrait;
 use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Exceptions\TemplatesException;
 use Tatter\Outbox\Models\TemplateModel;
-use Tests\Support\DatabaseTestCase;
+use Tests\Support\OutboxTestCase;
 
-class TemplateModelTest extends DatabaseTestCase
+final class TemplateModelTest extends OutboxTestCase
 {
+	use DatabaseTestTrait;
+
 	/**
 	 * @var Template
 	 */
-	protected $template;
+	private $template;
 
 	public function setUp(): void
 	{
