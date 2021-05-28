@@ -3,6 +3,7 @@ Email toolkit for CodeIgniter 4
 
 [![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions?query=workflow%3A%22PHPUnit)
 [![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions?query=workflow%3A%22PHPStan)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-outbox/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-outbox?branch=develop)
 
 ## Quick Start
 
