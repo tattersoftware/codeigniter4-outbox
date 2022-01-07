@@ -13,7 +13,7 @@
 						<option value="">NONE</option>
 
 						<?php foreach ($templates as $option): ?>
-						<option value="<?= $option->id ?>" <?= $option->id == $template->parent_id ? 'selected' : '' ?>><?= $option->name ?></option>
+						<option value="<?= $option->id ?>" <?= $option->id === $template->parent_id ? 'selected' : '' ?>><?= $option->name ?></option>
 						<?php endforeach; ?>
 
 					</select>

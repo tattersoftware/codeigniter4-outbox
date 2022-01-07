@@ -7,56 +7,59 @@ use Tatter\Outbox\Exceptions\TemplatesException;
 use Tatter\Outbox\Models\TemplateModel;
 use Tests\Support\OutboxTestCase;
 
+/**
+ * @internal
+ */
 final class TemplateModelTest extends OutboxTestCase
 {
-	use DatabaseTestTrait;
+    use DatabaseTestTrait;
 
-	/**
-	 * @var Template
-	 */
-	private $template;
+    /**
+     * @var Template
+     */
+    private $template;
 
-	public function setUp(): void
-	{
-		parent::setUp();
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-		$this->template = new Template([
-			'name'      => 'Test Template',
-			'subject'   => 'Some {subject}',
-			'body'      => '<p>{number}</p>',
-		]);
-		$this->template->id = model(TemplateModel::class)->insert($this->template);
-	}
+        $this->template = new Template([
+            'name'    => 'Test Template',
+            'subject' => 'Some {subject}',
+            'body'    => '<p>{number}</p>',
+        ]);
+        $this->template->id = model(TemplateModel::class)->insert($this->template);
+    }
 
-	public function testFindByName()
-	{
-		$result = (new TemplateModel())->findByName($this->template->name);
+    public function testFindByName()
+    {
+        $result = (new TemplateModel())->findByName($this->template->name);
 
-		$this->assertInstanceOf(Template::class, $result);
-		$this->assertEquals($this->template->id, $result->id);
-	}
+        $this->assertInstanceOf(Template::class, $result);
+        $this->assertSame($this->template->id, $result->id);
+    }
 
-	public function testFindByNameThrowsOnFailure()
-	{
-		$this->expectException(TemplatesException::class);
-		$this->expectExceptionMessage(lang('Templates.missingTemplate', ['foobar']));
+    public function testFindByNameThrowsOnFailure()
+    {
+        $this->expectException(TemplatesException::class);
+        $this->expectExceptionMessage(lang('Templates.missingTemplate', ['foobar']));
 
-		(new TemplateModel())->findByName('foobar');
-	}
+        (new TemplateModel())->findByName('foobar');
+    }
 
-	public function testSeederIgnoresExisting()
-	{
-		$this->seed(TemplateSeeder::class);
+    public function testSeederIgnoresExisting()
+    {
+        $this->seed(TemplateSeeder::class);
 
-		$this->dontSeeInDatabase('outbox_templates', ['name' => 'Default']);
-	}
+        $this->dontSeeInDatabase('outbox_templates', ['name' => 'Default']);
+    }
 
-	public function testSeederCreatesDefault()
-	{
-		(new TemplateModel())->truncate();
+    public function testSeederCreatesDefault()
+    {
+        (new TemplateModel())->truncate();
 
-		$this->seed(TemplateSeeder::class);
+        $this->seed(TemplateSeeder::class);
 
-		$this->seeInDatabase('outbox_templates', ['name' => 'Default']);
-	}
+        $this->seeInDatabase('outbox_templates', ['name' => 'Default']);
+    }
 }

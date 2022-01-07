@@ -11,7 +11,7 @@
       @media only screen and (max-width: 620px) {
         table[class=body] h1 {
           font-size: 28px !important;
-          margin-bottom: 10px !important; 
+          margin-bottom: 10px !important;
         }
         table[class=body] p,
         table[class=body] ul,
@@ -19,34 +19,34 @@
         table[class=body] td,
         table[class=body] span,
         table[class=body] a {
-          font-size: 16px !important; 
+          font-size: 16px !important;
         }
         table[class=body] .wrapper,
         table[class=body] .article {
-          padding: 10px !important; 
+          padding: 10px !important;
         }
         table[class=body] .content {
-          padding: 0 !important; 
+          padding: 0 !important;
         }
         table[class=body] .container {
           padding: 0 !important;
-          width: 100% !important; 
+          width: 100% !important;
         }
         table[class=body] .main {
           border-left-width: 0 !important;
           border-radius: 0 !important;
-          border-right-width: 0 !important; 
+          border-right-width: 0 !important;
         }
         table[class=body] .btn table {
-          width: 100% !important; 
+          width: 100% !important;
         }
         table[class=body] .btn a {
-          width: 100% !important; 
+          width: 100% !important;
         }
         table[class=body] .img-responsive {
           height: auto !important;
           max-width: 100% !important;
-          width: auto !important; 
+          width: auto !important;
         }
       }
 
@@ -55,7 +55,7 @@
       ------------------------------------- */
       @media all {
         .ExternalClass {
-          width: 100%; 
+          width: 100%;
         }
         .ExternalClass,
         .ExternalClass p,
@@ -63,7 +63,7 @@
         .ExternalClass font,
         .ExternalClass td,
         .ExternalClass div {
-          line-height: 100%; 
+          line-height: 100%;
         }
         .apple-link a {
           color: inherit !important;
@@ -71,7 +71,7 @@
           font-size: inherit !important;
           font-weight: inherit !important;
           line-height: inherit !important;
-          text-decoration: none !important; 
+          text-decoration: none !important;
         }
         #MessageViewBody a {
           color: inherit;
@@ -82,18 +82,18 @@
           line-height: inherit;
         }
         .btn-primary table td:hover {
-          background-color: #34495e !important; 
+          background-color: #34495e !important;
         }
         .btn-primary a:hover {
           background-color: #34495e !important;
-          border-color: #34495e !important; 
-        } 
+          border-color: #34495e !important;
+        }
         .btn-orange table td:hover {
-          background-color: #e0681c !important; 
+          background-color: #e0681c !important;
         }
         .btn-orange a:hover {
           background-color: #e0681c !important;
-          border-color: #e06110 !important; 
+          border-color: #e06110 !important;
         }
       }
 

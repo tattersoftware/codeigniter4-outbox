@@ -8,99 +8,102 @@ use Tatter\Outbox\Models\AttachmentModel;
 use Tatter\Outbox\Models\TemplateModel;
 use Tests\Support\OutboxTestCase;
 
+/**
+ * @internal
+ */
 final class EventTest extends OutboxTestCase
 {
-	use DatabaseTestTrait;
+    use DatabaseTestTrait;
 
-	public function testEventCreatesEmail()
-	{
-		$result = $this->email
-			->setFrom('from@example.com')
-			->setSubject('Email test')
-			->setMessage('This is only a test.')
-			->setMailType('html')
-			->send();
+    public function testEventCreatesEmail()
+    {
+        $result = $this->email
+            ->setFrom('from@example.com')
+            ->setSubject('Email test')
+            ->setMessage('This is only a test.')
+            ->setMailType('html')
+            ->send();
 
-		$this->assertTrue($result);
-		$this->seeInDatabase('outbox_emails', ['subject' => 'Email test']);
-	}
+        $this->assertTrue($result);
+        $this->seeInDatabase('outbox_emails', ['subject' => 'Email test']);
+    }
 
-	public function testEventCreatesRecipient()
-	{
-		$result = $this->email
-			->setFrom('from@example.com')
-			->setTo('to@example.com')
-			->setSubject('Email test')
-			->setMessage('This is only a test.')
-			->setMailType('html')
-			->send();
+    public function testEventCreatesRecipient()
+    {
+        $result = $this->email
+            ->setFrom('from@example.com')
+            ->setTo('to@example.com')
+            ->setSubject('Email test')
+            ->setMessage('This is only a test.')
+            ->setMailType('html')
+            ->send();
 
-		$this->assertTrue($result);
-		$this->seeInDatabase('outbox_recipients', ['email' => 'to@example.com']);
-	}
+        $this->assertTrue($result);
+        $this->seeInDatabase('outbox_recipients', ['email' => 'to@example.com']);
+    }
 
-	public function testEventCreatesAttachment()
-	{
-		$result = $this->email
-			->setFrom('from@example.com')
-			->setSubject('Email test')
-			->setMessage('This is only a test.')
-			->setMailType('html')
-			->attach($this->file)
-			->send();
+    public function testEventCreatesAttachment()
+    {
+        $result = $this->email
+            ->setFrom('from@example.com')
+            ->setSubject('Email test')
+            ->setMessage('This is only a test.')
+            ->setMailType('html')
+            ->attach($this->file)
+            ->send();
 
-		$this->assertTrue($result);
-		$this->seeInDatabase('outbox_attachments', ['name' => $this->file]);
-	}
+        $this->assertTrue($result);
+        $this->seeInDatabase('outbox_attachments', ['name' => $this->file]);
+    }
 
-	public function testAttachmentHasFilesize()
-	{
-		$result = $this->email
-			->setFrom('from@example.com')
-			->setSubject('Email test')
-			->setMessage('This is only a test.')
-			->setMailType('html')
-			->attach($this->file)
-			->send();
+    public function testAttachmentHasFilesize()
+    {
+        $result = $this->email
+            ->setFrom('from@example.com')
+            ->setSubject('Email test')
+            ->setMessage('This is only a test.')
+            ->setMailType('html')
+            ->attach($this->file)
+            ->send();
 
-		$this->assertTrue($result);
+        $this->assertTrue($result);
 
-		/** @var Attachment $attachment */
-		$attachment = model(AttachmentModel::class)->first();
-		$this->assertEquals(12026, $attachment->bytes);
-	}
+        /** @var Attachment $attachment */
+        $attachment = model(AttachmentModel::class)->first();
+        $this->assertSame(12026, $attachment->bytes);
+    }
 
-	public function testEventRespectsConfigLogging()
-	{
-		$config = config('Outbox');
-		$config->logging = false;
-		Factories::injectMock('Config', 'Outbox', $config);
+    public function testEventRespectsConfigLogging()
+    {
+        $config          = config('Outbox');
+        $config->logging = false;
+        Factories::injectMock('Config', 'Outbox', $config);
 
-		$result = $this->email
-			->setFrom('from@example.com')
-			->setSubject('Email test')
-			->setMessage('This is only a test.')
-			->setMailType('html')
-			->send();
+        $result = $this->email
+            ->setFrom('from@example.com')
+            ->setSubject('Email test')
+            ->setMessage('This is only a test.')
+            ->setMailType('html')
+            ->send();
 
-		$this->assertTrue($result);
-		$this->dontSeeInDatabase('outbox_emails', ['subject' => 'Email test']);
-	}
+        $this->assertTrue($result);
+        $this->dontSeeInDatabase('outbox_emails', ['subject' => 'Email test']);
+    }
 
-	public function testEventRecordsTemplate()
-	{
-		$model = new TemplateModel();
+    public function testEventRecordsTemplate()
+    {
+        $model = new TemplateModel();
 
-		$templateId = $model->insert(new Template([
-			'name'      => 'Test Template',
-			'subject'   => 'Some {subject}',
-			'body'      => '<p>{number}</p>',
-		]));
+        $templateId = $model->insert(new Template([
+            'name'    => 'Test Template',
+            'subject' => 'Some {subject}',
+            'body'    => '<p>{number}</p>',
+        ]));
 
-		$template = $model->findByName('Test Template');
-		$template->email()->send();
+        $template = $model->findByName('Test Template');
+        $template->email()->send();
 
-		$this->seeInDatabase('outbox_emails', ['template' => 'Test Template']);
-		$this->seeInDatabase('outbox_emails', ['template_id' => $templateId]);
-	}
+        $this->seeInDatabase('outbox_emails', ['template' => 'Test Template']);
+        $this->seeInDatabase('outbox_emails', ['template_id' => $templateId]);
+    }
 }
