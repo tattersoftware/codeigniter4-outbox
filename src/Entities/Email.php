@@ -1,6 +1,6 @@
 <?php namespace Tatter\Outbox\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class Email extends Entity
 {

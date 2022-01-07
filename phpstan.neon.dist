@@ -6,15 +6,15 @@ parameters:
 		- tests
 	bootstrapFiles:
 		- vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php
-	excludes_analyse:
+	excludePaths:
 		- src/Config/Routes.php
 		- src/Views/*
 	ignoreErrors:
-		- '#Call to an undefined method CodeIgniter\\Database\\BaseBuilder::first\(\)#'
+		- '#Call to an undefined method CodeIgniter\\Database\\BaseBuilder::[A-Za-z]+\(\)#'
 		- '#Unsafe usage of new static\(\)*#'
 	universalObjectCratesClasses:
-		- CodeIgniter\Entity
 		- CodeIgniter\Entity\Entity
+		- CodeIgniter\Entity\Entity\Entity
 		- Faker\Generator
 	scanDirectories:
 		- vendor/codeigniter4/codeigniter4/system/Helpers

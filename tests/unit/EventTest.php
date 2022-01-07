@@ -1,7 +1,8 @@
 <?php
 
-use CodeIgniter\Config\Config;
+use CodeIgniter\Config\Factories;
 use CodeIgniter\Test\DatabaseTestTrait;
+use Tatter\Outbox\Entities\Attachment;
 use Tatter\Outbox\Entities\Template;
 use Tatter\Outbox\Models\AttachmentModel;
 use Tatter\Outbox\Models\TemplateModel;
@@ -63,7 +64,8 @@ final class EventTest extends OutboxTestCase
 			->send();
 
 		$this->assertTrue($result);
-		
+
+		/** @var Attachment $attachment */
 		$attachment = model(AttachmentModel::class)->first();
 		$this->assertEquals(12026, $attachment->bytes);
 	}
@@ -72,7 +74,7 @@ final class EventTest extends OutboxTestCase
 	{
 		$config = config('Outbox');
 		$config->logging = false;
-		Config::injectMock('Outbox', $config);
+		Factories::injectMock('Config', 'Outbox', $config);
 
 		$result = $this->email
 			->setFrom('from@example.com')
@@ -87,13 +89,15 @@ final class EventTest extends OutboxTestCase
 
 	public function testEventRecordsTemplate()
 	{
-		$templateId = model(TemplateModel::class)->insert(new Template([
+		$model = new TemplateModel();
+
+		$templateId = $model->insert(new Template([
 			'name'      => 'Test Template',
 			'subject'   => 'Some {subject}',
 			'body'      => '<p>{number}</p>',
 		]));
 
-		$template = model(TemplateModel::class)->findByName('Test Template');
+		$template = $model->findByName('Test Template');
 		$template->email()->send();
 
 		$this->seeInDatabase('outbox_emails', ['template' => 'Test Template']);

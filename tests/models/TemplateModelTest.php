@@ -30,7 +30,7 @@ final class TemplateModelTest extends OutboxTestCase
 
 	public function testFindByName()
 	{
-		$result = model(TemplateModel::class)->findByName($this->template->name);
+		$result = (new TemplateModel())->findByName($this->template->name);
 
 		$this->assertInstanceOf(Template::class, $result);
 		$this->assertEquals($this->template->id, $result->id);
@@ -41,7 +41,7 @@ final class TemplateModelTest extends OutboxTestCase
 		$this->expectException(TemplatesException::class);
 		$this->expectExceptionMessage(lang('Templates.missingTemplate', ['foobar']));
 
-		model(TemplateModel::class)->findByName('foobar');
+		(new TemplateModel())->findByName('foobar');
 	}
 
 	public function testSeederIgnoresExisting()
@@ -53,7 +53,7 @@ final class TemplateModelTest extends OutboxTestCase
 
 	public function testSeederCreatesDefault()
 	{
-		model(TemplateModel::class)->truncate();
+		(new TemplateModel())->truncate();
 
 		$this->seed(TemplateSeeder::class);
 
