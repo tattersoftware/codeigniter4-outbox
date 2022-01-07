@@ -1,11 +1,11 @@
 /* -------------------------------------
   GLOBAL RESETS
 ------------------------------------- */
-      
+
 img {
 	border: none;
 	-ms-interpolation-mode: bicubic;
-	max-width: 100%; 
+	max-width: 100%;
 }
 
 body {
@@ -17,7 +17,7 @@ body {
 	margin: 0;
 	padding: 0;
 	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%; 
+	-webkit-text-size-adjust: 100%;
 }
 
 table {
@@ -28,7 +28,7 @@ table {
 	table td {
 	font-family: sans-serif;
 	font-size: 14px;
-	vertical-align: top; 
+	vertical-align: top;
 }
 
 /* -------------------------------------
@@ -37,7 +37,7 @@ table {
 
 .body {
 	background-color: #f6f6f6;
-	width: 100%; 
+	width: 100%;
 }
 
 /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
@@ -47,7 +47,7 @@ table {
 	/* makes it centered */
 	max-width: 580px;
 	padding: 10px;
-	width: 580px; 
+	width: 580px;
 }
 
 /* This should also be a block element, so that it will fill 100% of the .container */
@@ -56,7 +56,7 @@ table {
 	display: block;
 	margin: 0 auto;
 	max-width: 580px;
-	padding: 10px; 
+	padding: 10px;
 }
 
 /* -------------------------------------
@@ -65,12 +65,12 @@ table {
 .main {
 	background: #ffffff;
 	border-radius: 3px;
-	width: 100%; 
+	width: 100%;
 }
 
 .wrapper {
 	box-sizing: border-box;
-	padding: 20px; 
+	padding: 20px;
 }
 
 .content-block {
@@ -82,7 +82,7 @@ table {
 	clear: both;
 	margin-top: 10px;
 	text-align: center;
-	width: 100%; 
+	width: 100%;
 }
 	.footer td,
 	.footer p,
@@ -90,7 +90,7 @@ table {
 	.footer a {
 	color: #999999;
 	font-size: 12px;
-	text-align: center; 
+	text-align: center;
 }
 
 /* -------------------------------------
@@ -105,14 +105,14 @@ h4 {
 	font-weight: 400;
 	line-height: 1.4;
 	margin: 0;
-	margin-bottom: 30px; 
+	margin-bottom: 30px;
 }
 
 h1 {
 	font-size: 35px;
 	font-weight: 300;
 	text-align: center;
-	text-transform: capitalize; 
+	text-transform: capitalize;
 }
 
 p,
@@ -122,18 +122,18 @@ ol {
 	font-size: 14px;
 	font-weight: normal;
 	margin: 0;
-	margin-bottom: 15px; 
+	margin-bottom: 15px;
 }
 	p li,
 	ul li,
 	ol li {
 	list-style-position: inside;
-	margin-left: 5px; 
+	margin-left: 5px;
 }
 
 a {
 	color: #3498db;
-	text-decoration: underline; 
+	text-decoration: underline;
 }
 
 /* -------------------------------------
@@ -145,12 +145,12 @@ a {
 	.btn > tbody > tr > td {
 	padding-bottom: 15px; }
 	.btn table {
-	width: auto; 
+	width: auto;
 }
 	.btn table td {
 	background-color: #ffffff;
 	border-radius: 5px;
-	text-align: center; 
+	text-align: center;
 }
 	.btn a {
 	background-color: #ffffff;
@@ -165,52 +165,52 @@ a {
 	margin: 0;
 	padding: 12px 25px;
 	text-decoration: none;
-	text-transform: capitalize; 
+	text-transform: capitalize;
 }
 
 .btn-primary table td {
-	background-color: #3498db; 
+	background-color: #3498db;
 }
 
 .btn-primary a {
 	background-color: #3498db;
 	border-color: #3498db;
-	color: #ffffff; 
+	color: #ffffff;
 }
 
 /* -------------------------------------
 	OTHER STYLES THAT MIGHT BE USEFUL
 ------------------------------------- */
 .last {
-	margin-bottom: 0; 
+	margin-bottom: 0;
 }
 
 .first {
-	margin-top: 0; 
+	margin-top: 0;
 }
 
 .align-center {
-	text-align: center; 
+	text-align: center;
 }
 
 .align-right {
-	text-align: right; 
+	text-align: right;
 }
 
 .align-left {
-	text-align: left; 
+	text-align: left;
 }
 
 .clear {
-	clear: both; 
+	clear: both;
 }
 
 .mt0 {
-	margin-top: 0; 
+	margin-top: 0;
 }
 
 .mb0 {
-	margin-bottom: 0; 
+	margin-bottom: 0;
 }
 
 .preheader {
@@ -223,17 +223,17 @@ a {
 	overflow: hidden;
 	mso-hide: all;
 	visibility: hidden;
-	width: 0; 
+	width: 0;
 }
 
 .powered-by a {
-	text-decoration: none; 
+	text-decoration: none;
 }
 
 hr {
 	border: 0;
 	border-bottom: 1px solid #f6f6f6;
-	margin: 20px 0; 
+	margin: 20px 0;
 }
 
 /* -------------------------------------

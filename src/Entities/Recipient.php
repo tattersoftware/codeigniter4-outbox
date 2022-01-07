@@ -1,9 +1,11 @@
-<?php namespace Tatter\Outbox\Entities;
+<?php
 
-use CodeIgniter\Entity;
+namespace Tatter\Outbox\Entities;
+
+use CodeIgniter\Entity\Entity;
 
 class Recipient extends Entity
 {
-	protected $table = 'outbox_recipients';
-	protected $casts = ['outbox_email_id' => 'int'];
+    protected $table = 'outbox_recipients';
+    protected $casts = ['outbox_email_id' => 'int'];
 }
