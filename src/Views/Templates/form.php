@@ -1,4 +1,4 @@
-<?= $this->extend(config('Outbox')->layout) ?>
+<?= $this->extend(config('Layouts')->outbox) ?>
 <?= $this->section('main') ?>
 
 	<div class="row">

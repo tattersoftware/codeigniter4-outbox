@@ -22,14 +22,12 @@
     ],
     "require": {
         "php": "^7.3 || ^8.0",
-        "components/jquery": "^3.3",
-        "tatter/assets": "^2.2",
-        "tijsverkoyen/css-to-inline-styles": "^2.2",
-        "twbs/bootstrap": "^4.5"
+        "tatter/layouts": "^1.0",
+        "tijsverkoyen/css-to-inline-styles": "^2.2"
     },
     "require-dev": {
         "codeigniter4/codeigniter4": "dev-develop",
-        "myth/auth": "dev-develop",
+        "tatter/imposter": "^1.0",
         "tatter/tools": "^1.15"
     },
     "autoload": {
