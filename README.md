@@ -1,8 +1,9 @@
 # Tatter\Outbox
 Email toolkit for CodeIgniter 4
 
-[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions?query=workflow%3A%22PHPUnit)
-[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions?query=workflow%3A%22PHPStan)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/test.yml)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/analyze.yml)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/inspect.yml)
 [![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-outbox/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-outbox?branch=develop)
 
 ## Quick Start
@@ -21,16 +22,31 @@ model(TemplateModel::class)->findByName('Default')
 	->send();
 ```
 
-## Description
+## Features
 
-**Outbox** supplies a handful of useful tools to supplement the framework's native `Email`
-class.
+**Outbox** supplies useful tools to supplement the framework's native `Email` class:
+logging, style inlining, and templating.
+
+## Installation
+
+Install easily via Composer to take advantage of CodeIgniter 4's autoloading capabilities
+and always be up-to-date:
+```bash
+composer require tatter/outbox
+```
+
+Or, install manually by downloading the source files and adding the directory to
+**app/Config/Autoload.php**.
 
 ## Configuration (optional)
 
 The library's default behavior can be altered by extending its config file. Copy
 **examples/Outbox.php** to **app/Config/** and follow the instructions
 in the comments. If no config file is found in **app/Config** then the library will use its own.
+
+If you plan to use the Template Routes (see below) you should also want to configure
+[Tatter\Layouts](https://github.com/tattersoftware/codeigniter4-layouts) to ensure the
+views are displayed properly for your app.
 
 ## Usage
 

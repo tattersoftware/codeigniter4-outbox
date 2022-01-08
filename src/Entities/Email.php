@@ -3,6 +3,7 @@
 namespace Tatter\Outbox\Entities;
 
 use CodeIgniter\Entity\Entity;
+use RuntimeException;
 
 class Email extends Entity
 {
@@ -58,11 +59,13 @@ class Email extends Entity
      * Helper function to return attachments or recipients.
      *
      * @param string $target Object/table/model to request
+     *
+     * @throws RuntimeException
      */
     protected function getRelatedItems(string $target): array
     {
         if (empty($this->id)) {
-            throw new \RuntimeException('Object must be created before getting relations.');
+            throw new RuntimeException('Object must be created before getting relations.');
         }
 
         $property = $target . 's';
