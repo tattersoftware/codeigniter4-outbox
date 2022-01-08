@@ -7,11 +7,9 @@
 	<meta name="author" content="Tatter Software">
 	<title>Email Templates</title>
 
-	<?= service('assets')->tag('vendor/tinymce/tinymce.min.js') ?>
-
-	<?= service('assets')->tag('vendor/jquery/jquery.min.js') ?>
-
-	<?= service('assets')->tag('vendor/bootstrap/bootstrap.min.css') ?>
+	<script src="https://cdn.jsdelivr.net/npm/tinymce@5.10.2/tinymce.min.js" integrity="sha256-saVT0qXqZ6q6Ztwtmr00aNO4JXwVbZYpZUraZWO6/kI=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 	<?= $this->renderSection('headerAssets') ?>
 
@@ -24,14 +22,9 @@
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbars">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('emails/templates') ?>">List Templates</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<?= site_url('emails/templates/new') ?>">Add Template</a>
-				</li>
-			</ul>
+
+			<?= view('Tatter\Outbox\Views\navbar') ?>
+
 		</div>
 	</nav>
 
@@ -48,7 +41,8 @@
 
 	</main><!-- /.container -->
 
-	<?= service('assets')->tag('vendor/bootstrap/bootstrap.bundle.min.js') ?>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 	<?= $this->renderSection('footerAssets') ?>
 

@@ -24,6 +24,8 @@ class Outbox extends BaseConfig
      * Layout to use for Template management.
      *
      * @var string
+     *
+     * @deprecated Use Tatter\Layouts Config instead
      */
     public $layout = 'Tatter\Outbox\Views\layout';
 
