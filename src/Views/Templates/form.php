@@ -1,5 +1,10 @@
-<?= $this->extend(config('Layouts')->outbox) ?>
-<?= $this->section('main') ?>
+<?php $this->extend(config('Layouts')->outbox) ?>
+<?php $this->section('navbar') ?>
+
+	<?= view('Tatter\Outbox\Views\navbar') ?>
+
+<?php $this->endSection() ?>
+<?php $this->section('main') ?>
 
 	<div class="row">
 		<div class="col">
@@ -39,4 +44,4 @@
 		</div>
 	</div>
 
-<?= $this->endSection() ?>
+<?php $this->endSection() ?>
