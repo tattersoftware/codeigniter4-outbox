@@ -57,4 +57,14 @@ final class EmailTest extends OutboxTestCase
         $this->assertInstanceOf(Recipient::class, $result[0]);
         $this->assertSame('to@example.com', $result[0]->email);
     }
+
+    public function testGetRelatedUncreatedThrows()
+    {
+        $email = new Email();
+
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Object must be created before getting relations.');
+
+        $email->getRecipients();
+    }
 }
