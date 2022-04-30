@@ -2,9 +2,10 @@
 
 namespace Tatter\Outbox\Database\Seeds;
 
+use CodeIgniter\Database\Seeder;
 use Tatter\Outbox\Models\TemplateModel;
 
-class TemplateSeeder extends \CodeIgniter\Database\Seeder
+class TemplateSeeder extends Seeder
 {
     public function run()
     {

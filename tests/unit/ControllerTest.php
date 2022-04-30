@@ -18,17 +18,13 @@ final class ControllerTest extends OutboxTestCase
 
     /**
      * Our Controller set by the trait
-     *
-     * @var Templates|null
      */
-    protected $controller;
+    protected ?Templates $controller = null;
 
     /**
      * A test Template
-     *
-     * @var Template
      */
-    private $template;
+    private Template $template;
 
     protected function setUp(): void
     {

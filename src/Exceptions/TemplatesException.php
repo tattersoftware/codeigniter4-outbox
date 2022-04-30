@@ -2,7 +2,9 @@
 
 namespace Tatter\Outbox\Exceptions;
 
-class TemplatesException extends \RuntimeException
+use RuntimeException;
+
+class TemplatesException extends RuntimeException
 {
     public static function forMissingTemplate(string $name)
     {

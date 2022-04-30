@@ -10,15 +10,8 @@ use Tatter\Outbox\Entities\Template;
  */
 final class TemplateTest extends CIUnitTestCase
 {
-    /**
-     * @var DOMParser
-     */
-    protected $parser;
-
-    /**
-     * @var Template
-     */
-    protected $template;
+    protected DOMParser $parser;
+    protected Template $template;
 
     protected function setUp(): void
     {

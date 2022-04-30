@@ -14,10 +14,7 @@ final class TemplateModelTest extends OutboxTestCase
 {
     use DatabaseTestTrait;
 
-    /**
-     * @var Template
-     */
-    private $template;
+    private Template $template;
 
     protected function setUp(): void
     {

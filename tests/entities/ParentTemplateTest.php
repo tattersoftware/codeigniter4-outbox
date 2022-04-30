@@ -13,20 +13,9 @@ final class ParentTemplateTest extends OutboxTestCase
 {
     use DatabaseTestTrait;
 
-    /**
-     * @var DOMParser
-     */
-    private $parser;
-
-    /**
-     * @var Template
-     */
-    private $parent;
-
-    /**
-     * @var Template
-     */
-    private $template;
+    private DOMParser $parser;
+    private Template $parent;
+    private Template $template;
 
     protected function setUp(): void
     {

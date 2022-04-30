@@ -16,10 +16,8 @@ final class EmailTest extends OutboxTestCase
 
     /**
      * Record of the email sent during setUp.
-     *
-     * @var Tatter\Outbox\Entities\Email
      */
-    private $entity;
+    private Email $entity;
 
     /**
      * Send an email and fetch the database entry.
