@@ -1,9 +1,9 @@
 # Tatter\Outbox
 Email toolkit for CodeIgniter 4
 
-[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/test.yml)
-[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/analyze.yml)
-[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/inspect.yml)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/phpunit.yml)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/phpstan.yml)
+[![](https://github.com/tattersoftware/codeigniter4-outbox/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/codeigniter4-outbox/actions/workflows/deptrac.yml)
 [![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-outbox/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-outbox?branch=develop)
 
 ## Quick Start
@@ -11,7 +11,7 @@ Email toolkit for CodeIgniter 4
 1. Install with Composer: `> composer require tatter/outbox`
 2. Prepare the database: `> php spark migrate -all && php spark db:seed "Tatter\Outbox\Database\Seeds\TemplateSeeder"`
 3. Send beautiful, dynamic email:
-```
+```php
 model(TemplateModel::class)->findByName('Default')
 	->email([
 		'item' => 'Fancy Purse',
@@ -31,7 +31,7 @@ logging, style inlining, and templating.
 
 Install easily via Composer to take advantage of CodeIgniter 4's autoloading capabilities
 and always be up-to-date:
-```bash
+```shell
 composer require tatter/outbox
 ```
 
@@ -44,7 +44,7 @@ The library's default behavior can be altered by extending its config file. Copy
 **examples/Outbox.php** to **app/Config/** and follow the instructions
 in the comments. If no config file is found in **app/Config** then the library will use its own.
 
-If you plan to use the Template Routes (see below) you should also want to configure
+If you plan to use the Template Routes (see below) you might also want to configure
 [Tatter\Layouts](https://github.com/tattersoftware/codeigniter4-layouts) to ensure the
 views are displayed properly for your app.
 
@@ -73,14 +73,15 @@ supply your own as string parameters, or create a View file and add it to the co
 [Responsive HTML Email Template](https://github.com/leemunroe/responsive-html-email-template).
 This provides a solid basis for your emails so you can be sure they will display nicely on
 any device. Run the Template Seeder to begin using this as the default:
-
+```shell
 	php spark db:seed "Tatter\Outbox\Database\Seeds\TemplateSeeder"
+```
 
 You may also write your own templates and seed them or use the provided MVC bundle for
 managing email templates in your database. To enable the Controller you will need to
 toggle `$routeTemplates` in the configuration, or add the following routes to **app/Config/Routes.php**:
 
-```
+```php
 // Routes to Email Templates
 $routes->group('emails', ['namespace' => '\Tatter\Outbox\Controllers'], function ($routes)
 {
@@ -98,7 +99,7 @@ Be sure to secure appropriate access to these routes (e.g. with a Filter).
 Templates use View Parser "tokens" that will be passed through to add your data.
 The `Template` Entity can do this for you by passing in your data parameters:
 
-```
+```php
 $template = model(TemplateModel::class)->findByName('Item Purchase');
 
 $subject = $template->renderSubject(['item' => 'Fancy Purse']);
@@ -110,7 +111,7 @@ template in its parent (if defined).
 
 If you do not need any other configuration you can get a fully prepared
 version of the `Email` class with rendered and inlined content from the library:
-```
+```php
 $email = $template->email($data);
 $email->setTo('jill@example.com')->send();
 ```
