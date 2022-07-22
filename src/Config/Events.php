@@ -13,8 +13,9 @@ Events::on('email', static function ($params) {
         return;
     }
 
-    // Create the email record
-    if ($id = model(EmailModel::class)->ignore()->insert($params)) {
+    // Create the email record (ignores insert collisions)
+    $id = model(EmailModel::class)->ignore()->insert($params); // @phpstan-ignore-line
+    if ($id) {
         // Add each recipient
         foreach ($params['recipients'] as $email) {
             model(RecipientModel::class)->insert([

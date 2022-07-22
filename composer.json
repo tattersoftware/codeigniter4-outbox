@@ -1,7 +1,8 @@
 {
     "name": "tatter/outbox",
-    "type": "library",
     "description": "Email toolkit for CodeIgniter 4",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "codeigniter",
         "codeigniter4",
@@ -10,8 +11,6 @@
         "inline",
         "logging"
     ],
-    "homepage": "https://github.com/tattersoftware/codeigniter4-outbox",
-    "license": "MIT",
     "authors": [
         {
             "name": "Matthew Gatner",
@@ -20,6 +19,7 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/tattersoftware/codeigniter4-outbox",
     "require": {
         "php": "^7.4 || ^8.0",
         "tatter/layouts": "^1.0",
@@ -29,11 +29,8 @@
         "codeigniter4/framework": "^4.1",
         "tatter/tools": "^2.0"
     },
-    "config": {
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Tatter\\Outbox\\": "src"
@@ -47,17 +44,24 @@
             "Tests\\Support\\": "tests/_support"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
     "scripts": {
-        "analyze": "phpstan analyze",
+        "analyze": [
+            "phpstan analyze",
+            "psalm",
+            "rector process --dry-run"
+        ],
         "ci": [
             "Composer\\Config::disableProcessTimeout",
             "@deduplicate",
             "@analyze",
+            "@composer normalize --dry-run",
             "@test",
             "@inspect",
-            "rector process",
             "@style"
         ],
         "deduplicate": "phpcpd app/ src/",

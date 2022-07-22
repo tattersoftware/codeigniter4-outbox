@@ -23,13 +23,13 @@ class Templates extends ResourcePresenter
     /**
      * Gets a Template by its ID.
      *
-     * @param int|string|null $templateId
+     * @param int|string|null $id
      *
      * @throws PageNotFoundException
      */
-    public function getTemplate($templateId): Template
+    public function getTemplate($id): Template
     {
-        if (null !== $templateId && $template = $this->model->find($templateId)) {
+        if (null !== $id && $template = $this->model->find($id)) {
             return $template;
         }
 
@@ -41,11 +41,11 @@ class Templates extends ResourcePresenter
     /**
      * Displays the form to add a Template, with an optional one to copy.
      *
-     * @param int|string|null $templateId Another template to use as a starting point
+     * @param int|string|null $id Another template to use as a starting point
      */
-    public function new($templateId = null): string
+    public function new($id = null): string
     {
-        $template = null === $templateId ? new Template() : $this->model->find($templateId);
+        $template = null === $id ? new Template() : $this->model->find($id);
 
         return view('Tatter\Outbox\Views\Templates\form', [
             'method'    => $template->id ? 'Clone' : 'New',
@@ -79,41 +79,41 @@ class Templates extends ResourcePresenter
     /**
      * Renders a Template for previewing.
      *
-     * @param int|string $templateId
+     * @param int|string|null $id
      *
      * @throws PageNotFoundException
      */
-    public function show($templateId = null): string
+    public function show($id = null): string
     {
-        return $this->getTemplate($templateId)->renderBody();
+        return $this->getTemplate($id)->renderBody();
     }
 
     /**
      * Displays the form to edit a Template.
      *
-     * @param int|string $templateId
+     * @param int|string $id
      *
      * @throws PageNotFoundException
      */
-    public function edit($templateId = null): string
+    public function edit($id = null): string
     {
         return view('Tatter\Outbox\Views\Templates\form', [
             'method'    => 'Edit',
-            'template'  => $this->getTemplate($templateId),
-            'templates' => $this->model->where('id !=', $templateId)->orderBy('name')->findAll(),
+            'template'  => $this->getTemplate($id),
+            'templates' => $this->model->where('id !=', $id)->orderBy('name')->findAll(),
         ]);
     }
 
     /**
      * Updates a Template from posted form data.
      *
-     * @param int|string $templateId
+     * @param int|string $id
      *
      * @throws PageNotFoundException
      */
-    public function update($templateId = null): RedirectResponse
+    public function update($id = null): RedirectResponse
     {
-        $template = $this->getTemplate($templateId);
+        $template = $this->getTemplate($id);
 
         if ($this->model->update($template->id, $this->request->getPost())) {
             return redirect()->back()->with('success', 'Email template updated.');
@@ -125,13 +125,13 @@ class Templates extends ResourcePresenter
     /**
      * Deletes a Template.
      *
-     * @param int|string $templateId
+     * @param int|string $id
      *
      * @throws PageNotFoundException
      */
-    public function remove($templateId = null): RedirectResponse
+    public function remove($id = null): RedirectResponse
     {
-        $template = $this->getTemplate($templateId);
+        $template = $this->getTemplate($id);
 
         if ($this->model->delete($template->id)) {
             return redirect()->back()->with('success', 'Email template removed.');
@@ -143,25 +143,25 @@ class Templates extends ResourcePresenter
     /**
      * Displays the form to send an email.
      *
-     * @param int|string $templateId
+     * @param int|string $id
      *
      * @throws PageNotFoundException
      */
-    public function send($templateId = null): string
+    public function send($id = null): string
     {
         return view('Tatter\Outbox\Views\Templates\send', [
-            'template' => $this->getTemplate($templateId),
+            'template' => $this->getTemplate($id),
         ]);
     }
 
     /**
      * Sends an email using the Template.
      *
-     * @param int|string $templateId
+     * @param int|string $id
      *
      * @throws PageNotFoundException
      */
-    public function send_commit($templateId = null): RedirectResponse
+    public function send_commit($id = null): RedirectResponse
     {
         if (! $this->validate([
             'fromEmail' => 'valid_email',
@@ -170,7 +170,7 @@ class Templates extends ResourcePresenter
             return redirect()->back()->withInput()->with('error', implode('. ', $this->validator->getErrors()));
         }
 
-        $email = $this->getTemplate($templateId)->email($this->request->getPost());
+        $email = $this->getTemplate($id)->email($this->request->getPost());
 
         $email->setFrom($this->request->getPost('fromEmail'), $this->request->getPost('fromName'));
         $email->setTo($this->request->getPost('recipients'));

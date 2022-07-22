@@ -17,9 +17,9 @@ final class ControllerTest extends OutboxTestCase
     use DatabaseTestTrait;
 
     /**
-     * Our Controller set by the trait
+     * @var Templates|null
      */
-    protected ?Templates $controller = null;
+    protected $controller;
 
     /**
      * A test Template
