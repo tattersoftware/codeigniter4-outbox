@@ -16,6 +16,7 @@ class Template extends Entity
         'deleted_at',
     ];
     protected $casts = [
+        'id'        => '?int',
         'parent_id' => '?int',
     ];
 
