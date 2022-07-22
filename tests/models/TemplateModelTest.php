@@ -53,7 +53,7 @@ final class TemplateModelTest extends OutboxTestCase
 
     public function testSeederCreatesDefault()
     {
-        (new TemplateModel())->truncate();
+        (new TemplateModel())->builder()->truncate();
 
         $this->seed(TemplateSeeder::class);
 
