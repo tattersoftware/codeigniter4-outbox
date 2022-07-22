@@ -10,11 +10,9 @@ parameters:
 		- src/Config/Routes.php
 		- src/Views/*
 	ignoreErrors:
-		- '#Call to an undefined method CodeIgniter\\Database\\BaseBuilder::[A-Za-z]+\(\)#'
 		- '#Unsafe usage of new static\(\)*#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity\Entity
-		- CodeIgniter\Entity\Entity\Entity
 		- Faker\Generator
 	scanDirectories:
 		- vendor/codeigniter4/framework/system/Helpers
