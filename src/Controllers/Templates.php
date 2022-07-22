@@ -59,7 +59,7 @@ class Templates extends ResourcePresenter
      */
     public function create(): RedirectResponse
     {
-        if ($this->model->insert($this->request->getPost())) {
+        if ($this->model->insert($this->getData())) {
             return redirect()->to(site_url('emails/templates'))->with('success', 'Email template created.');
         }
 
@@ -115,7 +115,7 @@ class Templates extends ResourcePresenter
     {
         $template = $this->getTemplate($id);
 
-        if ($this->model->update($template->id, $this->request->getPost())) {
+        if ($this->model->update($template->id, $this->getData())) {
             return redirect()->back()->with('success', 'Email template updated.');
         }
 
@@ -180,5 +180,19 @@ class Templates extends ResourcePresenter
         }
 
         return redirect()->back()->withInput()->with('error', $email->printDebugger([]));
+    }
+
+    /**
+     * Retrieves POST data safe for the database.
+     */
+    protected function getData(): array
+    {
+        $data = $this->request->getPost();
+
+        if (array_key_exists('parent_id', $data)) {
+            $data['parent_id'] = empty($data['parent_id']) ? null : $data['parent_id'];
+        }
+
+        return $data;
     }
 }
