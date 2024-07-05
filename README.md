@@ -40,8 +40,11 @@ Or, install manually by downloading the source files and adding the directory to
 
 ## Configuration (optional)
 
-The library's default behavior can be altered by extending its config file. Copy
-**examples/Outbox.php** to **app/Config/** and follow the instructions
+The library's default behavior can be altered by extending its config file. You can create config file using this command
+```shell
+php spark outbox:publish
+```
+Or, manually by copy **examples/Outbox.php** to **app/Config/** and follow the instructions
 in the comments. If no config file is found in **app/Config** then the library will use its own.
 
 If you plan to use the Template Routes (see below) you might also want to configure
