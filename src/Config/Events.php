@@ -33,8 +33,19 @@ Events::on('email', static function ($params) {
                 'disposition'     => $attachment['disposition'],
                 'type'            => $attachment['type'],
                 'multipart'       => $attachment['multipart'],
-                'bytes'           => filesize($attachment['name'][0]),
+                'bytes'           => getRemoteFileSize($attachment['name'][0]) ?? filesize($attachment['name'][0]),
             ]);
         }
     }
 });
+
+function getRemoteFileSize($url)
+{
+    $headers = get_headers($url, 1);
+
+    if (isset($headers['Content-Length'])) {
+        return $headers['Content-Length'];
+    }
+
+    return false;
+}
